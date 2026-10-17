@@ -86,10 +86,10 @@
     return `
       <div class="medidor medidor-${quem}">
         <span class="medidor-nome">${esc(nome)}</span>
-        <div class="medidor-barra" role="meter" aria-label="Raiva de ${esc(nome)}" aria-valuemin="0" aria-valuemax="10" aria-valuenow="${valor}">
+        <div class="medidor-barra" role="meter" aria-label="${esc(nome)}" aria-valuemin="0" aria-valuemax="10" aria-valuenow="${valor}">
           <div class="medidor-enchimento" style="width:${pct}%;background-color:${cor}"></div>
         </div>
-        <span class="medidor-valor">${valor}</span>
+        <span class="medidor-valor">${valor}<small>/${Motor.MAX}</small></span>
       </div>`;
   }
 
@@ -101,9 +101,9 @@
   function desenharHud() {
     const no = Motor.atual(estado);
     hud.innerHTML = `
-      ${medidor('eu', 'Tu', euVisivel())}
+      ${medidor('eu', 'A tua raiva', euVisivel())}
       <span class="hora">${esc(no.hora || '')}</span>
-      ${no.ausente ? '<div></div>' : medidor('outro', nomeCurto(), estado.outro)}`;
+      ${no.ausente ? '<div></div>' : medidor('outro', `Raiva ${ref('do').replace(estado.cen.outro, nomeCurto())}`, estado.outro)}`;
   }
 
   // ---------- A conversa, que cresce para baixo ----------

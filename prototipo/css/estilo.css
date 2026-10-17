@@ -68,7 +68,9 @@ body {
 }
 .medidor-outro .medidor-barra { transform: scaleX(-1); }
 .medidor-enchimento { height: 100%; transition: width .5s ease, background-color .5s ease; }
-.medidor-valor { font-weight: 700; width: 1.4em; text-align: center; }
+.medidor-valor { font-weight: 700; min-width: 2.6em; text-align: center; white-space: nowrap; }
+.medidor-valor small { font-weight: 500; font-size: .75em; opacity: .7; }
+.medidor-nome { white-space: nowrap; }
 .hora {
   font-weight: 700;
   background: var(--tinta);
