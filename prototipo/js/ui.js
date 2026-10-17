@@ -4,10 +4,6 @@
   const CHAVE = 'asclaras-resultados';
   const CHAVE_INTRO = 'asclaras-introducao-vista';
 
-  // Previsão: antes de dizer, o que a resposta vai fazer ao outro.
-  const REAGE = { aproxima: 'Aproxima-se ou justifica-se', defende: 'Defende-se ou afasta-se', nada: 'Não dá por nada' };
-  // No fim, o que aconteceu mostra-se com o detalhe.
-  const REACAO = { abre: 'aproximou-se', justifica: 'justificou-se', defende: 'defendeu-se', afasta: 'afastou-se', nada: 'não deu por nada' };
 
   // «E tu?»: depois de o outro reagir, o que sentes. Lista provisória (por decidir, ver estado.md).
   // A faixa de cada emoção escolhe o pensamento «Por dentro». Não mexe na raiva do motor.
@@ -37,7 +33,7 @@
   const conversa = $('#conversa');
 
   let estado = null;
-  // introducao | menu | sentir (o outro reagiu, dizes o que sentes, se quiseres) | responder | prever
+  // consentimento | introducao | menu | sentir (o outro reagiu, dizes o que sentes, se quiseres) | responder
   // | pausa | pausa2 | distancia | fim | perfil
   // Se o registo estiver configurado, o consentimento vem antes de tudo, em cada visita
   // (nos laboratórios o computador é partilhado, não se herda o consentimento de outra pessoa).
@@ -47,8 +43,6 @@
   let desde = 0;             // quando apareceu a pergunta atual, para medir o tempo de resposta
   let passoIntro = 0;
   let rotuloPausa = null;
-  let pendente = null;
-  let previsao = { outro: null };
   let registo = [];          // a conversa no ecrã, de cima para baixo
   let voltarPara = 'responder';
   let pensamento = null;     // o pensamento automático do momento, na nuvem da cena
@@ -109,7 +103,7 @@
   // ---------- A conversa, que cresce para baixo ----------
 
   // Ao entrar num nó: o que se vê e o que o outro diz entram na conversa.
-  // Se previste a reação do outro, a seguir perguntamos o que sentes, e só depois vem o pensamento.
+  // Até se saber o que se passa, a seguir à fala do outro pergunta-se o que sentes, e só depois vem o pensamento.
   function ouvirNo(perguntarEmocao) {
     const no = Motor.atual(estado);
     pensamento = null;
@@ -134,7 +128,6 @@
       Registo.evento('fim', {
         no: estado.no, verdade: r.verdade, relacao: r.relacao, adiado: r.adiado, sabe: r.sabe,
         raivaMax: r.raivaMax, pausas: r.pausas, escondidas: r.escondidas, posturas: r.posturas,
-        previsoes: { certas: r.previsoes.outro, total: r.previsoes.total },
         leituraCerta: r.leitura ? r.leitura.certa : null,
         gatilho: r.primeiraReacao ? r.primeiraReacao.lente : null
       });
@@ -165,11 +158,6 @@
   }
 
   // ---------- Zona de responder, em baixo ----------
-
-  function chips(grupo, mapa, escolhido) {
-    return `<div class="chips" role="group">${Object.entries(mapa).map(([k, v]) =>
-      `<button class="chip${escolhido === k ? ' ativo' : ''}" data-prev="${grupo}" data-valor="${k}" aria-pressed="${escolhido === k}">${esc(v)}</button>`).join('')}</div>`;
-  }
 
   function botaoPausa() {
     return Motor.podePausar(estado) ? '<button class="pausa" data-acao="pausa">Fazer uma pausa</button>' : '';
@@ -208,19 +196,6 @@
       ${botaoPausa()}`;
   }
 
-  function desenharPrever() {
-    const op = Motor.atual(estado).opcoes[pendente];
-    const pronto = !!previsao.outro;
-    painel.innerHTML = `
-      <p class="zona-escrita">Vais dizer: ${esc(semAspas(op.texto))}</p>
-      <p class="zona-pergunta">O que achas que isto vai fazer ${esc(ref('ao'))}?</p>
-      ${chips('outro', REAGE, previsao.outro)}
-      <div class="acoes">
-        <button class="avancar" data-acao="dizer" ${pronto ? '' : 'disabled'}>Dizer</button>
-        <button class="pausa secundario" data-acao="trocar">Escolher outra resposta</button>
-      </div>`;
-  }
-
   function desenharPausa() {
     const emocoes = estado.cen.emocoes || ['Raiva', 'Frustração', 'Medo', 'Cansaço'];
     painel.innerHTML = `
@@ -256,8 +231,7 @@
   }
 
   // A conversa outra vez, resposta a resposta: primeiro o que disseste e o que o outro respondeu,
-  // depois só as tuas perceções (o que previste e o que sentiste). As surpresas sobressaem.
-  const PREVISTO = { aproxima: 'que se aproximasse ou justificasse', defende: 'que se defendesse ou afastasse', nada: 'que não desse por nada' };
+  // depois só as tuas perceções (o que sentiste e o que achaste que se passava). As surpresas sobressaem.
 
   function rever(conversa) {
     // a conversa aqui é a do motor, não o registo do ecrã
@@ -269,12 +243,8 @@
         return `<li class="rever-pausa">Pausa${t.rotulo ? `: deste o nome «${esc(t.rotulo.toLowerCase())}» ao que sentias` : ''}${t.distanciou ? ', e olhaste para a cena de fora' : ''}.</li>`;
       }
       n += 1;
-      const falhou = !!t.outroPrev && t.outroPrev !== t.outroReal;
       const leuMal = !!t.leitura && !t.leitura.certa;
       const percecoes = [];
-      if (t.outroPrev) {
-        percecoes.push(`<strong>O que previste:</strong> ${esc(PREVISTO[t.outroPrev])}. ${esc(maiusc(ref('o')))} ${esc(REACAO[t.reacao] || '')}.`);
-      }
       if (t.emocao && EMOCOES[t.emocao]) {
         const em = EMOCOES[t.emocao];
         percecoes.push(`<strong>O que sentiste:</strong> ${em.emoji} ${esc(em.nome.toLowerCase())}.`);
@@ -283,10 +253,9 @@
         percecoes.push(`<strong>O que achaste que se passava:</strong> ${esc(semAspas(t.leitura.texto).replace(/\.$/, '').toLowerCase())}. Nesta partida, ${esc(estado.cen.descricaoVerdade[estado.verdade])}.`);
       }
       return `
-        <li${falhou || leuMal ? ' class="rever-surpresa"' : ''}>
+        <li${leuMal ? ' class="rever-surpresa"' : ''}>
           <div class="rever-topo">
             <span class="rever-n">Resposta ${n}</span>
-            ${falhou ? '<span class="rever-falhou">Não era o que esperavas</span>' : ''}
             ${leuMal ? '<span class="rever-falhou">Não era o que se passava</span>' : ''}
           </div>
           <div class="msg msg-eu">
@@ -321,7 +290,6 @@
     if (r.exemplos.assertiva) exemplo = `Uma resposta tua assertiva: <span class="citacao">«${esc(semAspas(r.exemplos.assertiva))}»</span>`;
     else if (r.assertivaQuente) exemplo = `Com raiva, esteve ao teu alcance esta resposta assertiva: <span class="citacao">«${esc(semAspas(r.assertivaQuente))}»</span>`;
 
-    const pv = r.previsoes;
     const i = ORDEM.indexOf(cen.id);
     const seguinte = ORDEM[i + 1];
     const todos = ORDEM.every((id) => resultados[id]);
@@ -343,7 +311,6 @@
         ${r.primeiraReacao ? `<p>${esc(cen.gatilhos[r.primeiraReacao.lente] || '')}</p>` : ''}
         <p class="definicao">${esc(DEF_ASSERTIVA)}</p>
         ${exemplo ? `<p>${exemplo}</p>` : ''}
-        ${pv.total ? `<p>Acertaste na reação ${esc(ref('do'))} em ${pv.outro} de ${pv.total} respostas${pv.totalEu ? `, e no que aconteceu à tua raiva em ${pv.eu} de ${pv.totalEu}` : ''}.</p>` : ''}
         <p class="espelho-nota">Nesta partida, ${esc(cen.descricaoVerdade[r.verdade])}. Noutra partida pode ser diferente.</p>
       </div>
       <div class="acoes">
@@ -393,12 +360,6 @@
       : 'O primeiro gatilho da tua raiva mudou de cenário para cenário.';
     const maisQuente = rs.slice().sort((a, b) => b.r.raivaMax - a.r.raivaMax)[0];
 
-    const pv = rs.reduce((a, x) => ({
-      ok: a.ok + x.r.previsoes.outro,
-      total: a.total + x.r.previsoes.total,
-      okEu: a.okEu + (x.r.previsoes.eu || 0),
-      totalEu: a.totalEu + (x.r.previsoes.totalEu || 0)
-    }), { ok: 0, total: 0, okEu: 0, totalEu: 0 });
 
     painel.innerHTML = `
       <h2 class="fim-titulo">O teu perfil nos três cenários</h2>
@@ -420,7 +381,6 @@
           : `<p>A tua raiva nunca chegou a ${Motor.ALTA} (em 10) no momento de responder.</p>`}
         <p class="definicao">${esc(DEF_ASSERTIVA)}</p>
       </section>
-      ${pv.total ? `<section class="espelho-bloco"><h3>O que previste</h3><p>Acertaste na reação da outra pessoa em ${pv.ok} de ${pv.total} respostas${pv.totalEu ? `, e no que aconteceu à tua raiva em ${pv.okEu} de ${pv.totalEu}` : ''}.</p></section>` : ''}
       <div class="acoes">
         <button class="avancar" data-acao="menu">Voltar aos cenários</button>
         <button class="pausa secundario" data-acao="apagar">Apagar resultados</button>
@@ -431,11 +391,11 @@
     hud.innerHTML = '';
     palco.innerHTML = `<div class="titulo-jogo titulo-intro"><h1>${esc(NOME_JOGO)}</h1><p>Antes de começar</p></div>`;
     painel.innerHTML = `
-      <p class="intro-texto">Este jogo faz parte de um estudo sobre conversas difíceis. Se aceitares, as tuas escolhas ficam registadas: as respostas, as previsões, as emoções, as pausas e o tempo que demoras a decidir.</p>
+      <p class="intro-texto">Este jogo faz parte de um estudo sobre conversas difíceis. Se aceitares, as tuas escolhas ficam registadas: as respostas, as emoções, as pausas e o tempo que demoras a decidir.</p>
       <p class="intro-texto">Não é registado o teu nome, o teu email nem o endereço do computador. Podes desistir a qualquer momento, basta fechar a página. Jogar sem registar é igual em tudo.</p>
       <label class="zona-pergunta" for="codigo">Código anónimo (opcional)</label>
-      <p class="vez-nota">Para ligar este jogo aos questionários: as duas primeiras letras do nome da tua mãe e o dia em que nasceste, por exemplo MA07.</p>
-      <input id="codigo" class="codigo" maxlength="20" autocomplete="off" spellcheck="false">
+      <p class="vez-nota">Para ligar este jogo aos questionários: as duas primeiras letras do nome próprio da tua mãe, as duas primeiras do nome próprio do teu pai, e o dia e o mês em que nasceste. Por exemplo, mãe Maria, pai José, nascido a 7 de março: MAJO0703.</p>
+      <input id="codigo" class="codigo" maxlength="12" autocomplete="off" spellcheck="false">
       <div class="acoes">
         <button class="avancar" data-acao="aceitar">Aceito, registar as minhas escolhas</button>
         <button class="pausa secundario" data-acao="recusar">Jogar sem registar</button>
@@ -502,7 +462,6 @@
       fim: desenharFim,
       sentir: desenharSentir,
       responder: desenharResponder,
-      prever: desenharPrever,
       pausa: desenharPausa,
       pausa2: desenharPausa2,
       distancia: desenharDistanciamento
@@ -580,19 +539,6 @@
       modo = 'distancia';
     } else if (acao === 'voltar') {
       modo = voltarPara;
-    } else if (acao === 'trocar') {
-      Registo.evento('trocar', Object.assign(momento(), { i: pendente, ms: ms() }));
-      modo = 'responder';
-    } else if (b.dataset.prev) {
-      previsao[b.dataset.prev] = b.dataset.valor;
-    } else if (acao === 'dizer') {
-      const i = pendente;
-      pendente = null;
-      const op = Motor.atual(estado).opcoes[i];
-      Registo.evento('dizer', Object.assign(momento(), { i, previsao: previsao.outro, reacao: op.reage || null, ms: ms() }));
-      Motor.escolher(estado, i, previsao);
-      registarFala(op);
-      ouvirNo(!!(estado.eco && estado.eco.previsao));
     } else if (b.dataset.i !== undefined) {
       const i = Number(b.dataset.i);
       const op = Motor.atual(estado).opcoes[i];
@@ -603,29 +549,15 @@
         // A primeira reação e a leitura do outro são pensamentos, não entram na conversa.
         Motor.escolher(estado, i);
         ouvirNo(false);
-      } else if (estado.marcas.sabe) {
-        // Depois de o outro explicar o que se passa, já não há reação a prever.
-        Motor.escolher(estado, i);
-        registarFala(op);
-        ouvirNo(false);
-      } else if (estado.cen.nos[op.vai] && estado.cen.nos[op.vai].leitura) {
-        // A seguir vem a pergunta sobre o que se passa com o outro: sem previsão, para não serem duas seguidas.
-        Registo.evento('dizer', Object.assign(momento(), { i, previsao: null, reacao: op.reage || null, ms: 0 }));
-        Motor.escolher(estado, i);
-        registarFala(op);
-        ouvirNo(true);
       } else {
-        pendente = i;
-        previsao = { outro: null };
-        modo = 'prever';
+        // Sem previsão: a resposta é dita logo. Até se saber o que se passa, pergunta-se o que sentes.
+        const sabia = estado.marcas.sabe;
+        Motor.escolher(estado, i);
+        registarFala(op);
+        ouvirNo(!sabia);
       }
     }
     render();
-    // Nas previsões, o foco fica no botão carregado em vez de saltar para o início.
-    if (b.dataset.prev === 'outro') {
-      const mesmo = painel.querySelector(`[data-prev="${b.dataset.prev}"][data-valor="${b.dataset.valor}"]`);
-      if (mesmo) mesmo.focus({ preventScroll: true });
-    }
   });
 
   render();
