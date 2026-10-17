@@ -121,6 +121,9 @@
     e.avisos = [];
     if (op.tipo === 'leitura') {
       e.leitura = { certa: op.certaSe === e.verdade, texto: op.texto };
+      // Fica também no turno que a provocou, para a revisão final.
+      const turno = e.conversa[e.conversa.length - 1];
+      if (turno && !turno.pausa) turno.leitura = e.leitura;
     } else if (op.tipo === 'reacao') {
       e.primeiraReacao = { texto: op.texto, lente: op.lente };
     } else {
@@ -182,8 +185,6 @@
   // Depois de ouvir o outro: o que sentes (emoção escolhida pelo jogador).
   // Fica registada, mas não mexe na raiva do motor.
   function sentir(e, emocao) {
-    const ult = e.previsoes[e.previsoes.length - 1];
-    if (ult) ult.emocao = emocao;
     const fala = e.conversa[e.conversa.length - 1];
     if (fala) fala.emocao = emocao;
     if (e.eco) e.eco.emocao = emocao;

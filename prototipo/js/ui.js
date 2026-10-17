@@ -270,6 +270,7 @@
       }
       n += 1;
       const falhou = !!t.outroPrev && t.outroPrev !== t.outroReal;
+      const leuMal = !!t.leitura && !t.leitura.certa;
       const percecoes = [];
       if (t.outroPrev) {
         percecoes.push(`<strong>O que previste:</strong> ${esc(PREVISTO[t.outroPrev])}. ${esc(maiusc(ref('o')))} ${esc(REACAO[t.reacao] || '')}.`);
@@ -278,11 +279,15 @@
         const em = EMOCOES[t.emocao];
         percecoes.push(`<strong>O que sentiste:</strong> ${em.emoji} ${esc(em.nome.toLowerCase())}.`);
       }
+      if (t.leitura) {
+        percecoes.push(`<strong>O que achaste que se passava:</strong> ${esc(semAspas(t.leitura.texto).replace(/\.$/, '').toLowerCase())}. Nesta partida, ${esc(estado.cen.descricaoVerdade[estado.verdade])}.`);
+      }
       return `
-        <li${falhou ? ' class="rever-surpresa"' : ''}>
+        <li${falhou || leuMal ? ' class="rever-surpresa"' : ''}>
           <div class="rever-topo">
             <span class="rever-n">Resposta ${n}</span>
             ${falhou ? '<span class="rever-falhou">Não era o que esperavas</span>' : ''}
+            ${leuMal ? '<span class="rever-falhou">Não era o que se passava</span>' : ''}
           </div>
           <div class="msg msg-eu">
             <span class="msg-nome">Tu${t.postura ? ` · a tua resposta foi ${esc(postura[t.postura])}` : ''}</span>
@@ -603,6 +608,12 @@
         Motor.escolher(estado, i);
         registarFala(op);
         ouvirNo(false);
+      } else if (estado.cen.nos[op.vai] && estado.cen.nos[op.vai].leitura) {
+        // A seguir vem a pergunta sobre o que se passa com o outro: sem previsão, para não serem duas seguidas.
+        Registo.evento('dizer', Object.assign(momento(), { i, previsao: null, reacao: op.reage || null, ms: 0 }));
+        Motor.escolher(estado, i);
+        registarFala(op);
+        ouvirNo(true);
       } else {
         pendente = i;
         previsao = { outro: null };
