@@ -6,14 +6,15 @@
 
 
   // «E tu?»: depois de o outro reagir, o que sentes. Lista provisória (por decidir, ver estado.md).
-  // A faixa de cada emoção escolhe o pensamento «Por dentro». Não mexe na raiva do motor.
+  // A faixa de cada emoção escolhe o pensamento na nuvem e a cara a expressão da tua personagem.
+  // Não mexe na raiva do motor.
   const EMOCOES = {
-    calma: { emoji: '😌', nome: 'Calma', faixa: 'calmo' },
-    curiosidade: { emoji: '🤔', nome: 'Curiosidade', faixa: 'calmo' },
-    tristeza: { emoji: '😔', nome: 'Tristeza', faixa: 'tenso' },
-    medo: { emoji: '😟', nome: 'Medo', faixa: 'tenso' },
-    irritacao: { emoji: '😤', nome: 'Irritação', faixa: 'tenso' },
-    raiva: { emoji: '😠', nome: 'Raiva', faixa: 'quente' }
+    calma: { emoji: '😌', nome: 'Calma', faixa: 'calmo', cara: 'calmo' },
+    curiosidade: { emoji: '🤔', nome: 'Curiosidade', faixa: 'calmo', cara: 'calmo' },
+    tristeza: { emoji: '😔', nome: 'Tristeza', faixa: 'tenso', cara: 'triste' },
+    medo: { emoji: '😟', nome: 'Medo', faixa: 'tenso', cara: 'preocupado' },
+    irritacao: { emoji: '😤', nome: 'Irritação', faixa: 'tenso', cara: 'tenso' },
+    raiva: { emoji: '😠', nome: 'Raiva', faixa: 'quente', cara: 'zangado' }
   };
 
   const POSTURAS = [
@@ -46,6 +47,7 @@
   let registo = [];          // a conversa no ecrã, de cima para baixo
   let voltarPara = 'responder';
   let pensamento = null;     // o pensamento automático do momento, na nuvem da cena
+  let caraEu = null;         // a expressão da tua personagem, quando escolheste uma emoção
   let resultados = carregar();
 
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -107,6 +109,7 @@
   function ouvirNo(perguntarEmocao) {
     const no = Motor.atual(estado);
     pensamento = null;
+    caraEu = null;
     if (no.fim) { modo = faseResposta(); return; }
     if (no.narracao) registo.push({ quem: 'narra', texto: no.narracao });
     if (no.fala) registo.push({ quem: 'outro', texto: no.fala });
@@ -117,6 +120,7 @@
 
   function pensar(emocao) {
     pensamento = Motor.pensamento(estado, emocao ? EMOCOES[emocao].faixa : null);
+    caraEu = emocao ? EMOCOES[emocao].cara : null;
   }
 
   function faseResposta() {
@@ -455,7 +459,7 @@
     conversa.hidden = !emConversa;
     // Enquanto o outro fala e dizes o que sentes, ele fica em destaque. Depois é a tua vez.
     const vez = modo === 'sentir' ? 'outro' : modo === 'fim' ? null : 'eu';
-    palco.innerHTML = Cena.desenhar(modo === 'sentir' ? Object.assign({}, estado, { eu: euVisivel() }) : estado, vez, pensamento);
+    palco.innerHTML = Cena.desenhar(modo === 'sentir' ? Object.assign({}, estado, { eu: euVisivel() }) : estado, vez, pensamento, caraEu);
     desenharHud();
     if (emConversa) desenharConversa();
     ({

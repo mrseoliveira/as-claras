@@ -262,7 +262,8 @@
 
   // vez: 'outro' (o outro fala, tu pensas) | 'eu' (é a tua vez) | null (ninguém em destaque)
   // pensa: o pensamento automático, numa nuvem por cima da tua cabeça
-  function desenhar(e, vez, pensa) {
+  // caraEu: expressão da tua personagem escolhida pela emoção que disseste sentir (senão, segue a raiva)
+  function desenhar(e, vez, pensa, caraEu) {
     const no = global.Motor.atual(e);
     const cen = e.cen;
     const cfg = cen.cena || {};
@@ -277,7 +278,7 @@
     const aderecoOutro = no.aderecoOutro || ad.outro;   // ex.: o Tomás passa a ter o portátil quando começa a escrever
 
     const eu = personagem({
-      x: 270, raiva: e.eu, expr: no.exprEu || null,
+      x: 270, raiva: e.eu, expr: caraEu || no.exprEu || null,
       pele: '#f5c7a1', camisola: '#ffd23f', cabelo: '#2b2042', cabeloTipo: 'liso',
       apagado: vez === 'outro',
       balao: vez === 'outro' ? 'pensa' : null, ladoBalao: 'direita', corBalao: '#fff1b8',
