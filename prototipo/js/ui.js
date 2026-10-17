@@ -464,7 +464,6 @@
       </div>
       <div class="acoes">
         ${todos ? '<button class="avancar" data-acao="perfil">Ver o teu perfil</button>' : ''}
-        <a class="pausa secundario" href="curso.html">Curso de assertividade</a>
         <button class="pausa secundario" data-acao="rever-intro">Rever a introdução</button>
       </div>`;
   }
