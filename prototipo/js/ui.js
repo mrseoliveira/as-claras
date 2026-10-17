@@ -251,41 +251,45 @@
     return `<ul>${itens.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>`;
   }
 
-  // A conversa outra vez, resposta a resposta: o que disseste, como foi ouvido,
-  // o que previste e o que aconteceu. Aberta e em destaque, e as surpresas sobressaem.
+  // A conversa outra vez, resposta a resposta: primeiro o que disseste e o que o outro respondeu,
+  // depois só as tuas perceções (o que previste e o que sentiste). As surpresas sobressaem.
+  const PREVISTO = { aproxima: 'que se aproximasse ou justificasse', defende: 'que se defendesse ou afastasse', nada: 'que não desse por nada' };
+
   function rever(conversa) {
     // a conversa aqui é a do motor, não o registo do ecrã
     if (!conversa || !conversa.some((t) => !t.pausa)) return '';
     const postura = Object.fromEntries(POSTURAS.map(([k, v]) => [k, v.slice(0, -1).toLowerCase()]));
-    const reage = (k) => REAGE[k].toLowerCase();
     let n = 0;
     const itens = conversa.map((t) => {
       if (t.pausa) {
         return `<li class="rever-pausa">Pausa${t.rotulo ? `: deste o nome «${esc(t.rotulo.toLowerCase())}» ao que sentias` : ''}${t.distanciou ? ', e olhaste para a cena de fora' : ''}.</li>`;
       }
       n += 1;
-      const linhas = [];
-      let falhou = false;
-      if (t.ouviu) linhas.push(`${esc(maiusc(ref('o')))} ouviu ${esc(t.ouviu)}.`);
+      const falhou = !!t.outroPrev && t.outroPrev !== t.outroReal;
+      const percecoes = [];
       if (t.outroPrev) {
-        const certo = t.outroPrev === t.outroReal;
-        linhas.push(`<strong>Previste:</strong> ${esc(reage(t.outroPrev))}. ${esc(maiusc(ref('o')))} ${esc(REACAO[t.reacao] || reage(t.outroReal))}.`);
-        if (!certo) falhou = true;
+        percecoes.push(`<strong>O que previste:</strong> ${esc(PREVISTO[t.outroPrev])}. ${esc(maiusc(ref('o')))} ${esc(REACAO[t.reacao] || '')}.`);
       }
       if (t.emocao && EMOCOES[t.emocao]) {
         const em = EMOCOES[t.emocao];
-        linhas.push(`Depois da resposta ${esc(ref('do'))}, sentiste: ${em.emoji} ${esc(em.nome.toLowerCase())}.`);
+        percecoes.push(`<strong>O que sentiste:</strong> ${em.emoji} ${esc(em.nome.toLowerCase())}.`);
       }
-      if (t.postura) linhas.push(`<strong>Postura:</strong> ${esc(postura[t.postura])}.`);
-      const tapada = t.tapadas && t.tapadas[0]
-        ? `<p class="rever-tapada">Com menos raiva, também podias ter dito: «${esc(semAspas(t.tapadas[0]))}»</p>` : '';
       return `
         <li${falhou ? ' class="rever-surpresa"' : ''}>
-          ${falhou ? '<span class="rever-falhou">Não era o que esperavas</span>' : ''}
-          <p class="rever-tu"><span class="rever-n">${n}</span> Tu: ${esc(t.texto)}</p>
-          ${linhas.map((l) => `<p>${l}</p>`).join('')}
-          ${t.resposta ? `<p class="rever-outro">${esc(nomeCurto())}: ${esc(t.resposta)}</p>` : ''}
-          ${tapada}
+          <div class="rever-topo">
+            <span class="rever-n">Resposta ${n}</span>
+            ${falhou ? '<span class="rever-falhou">Não era o que esperavas</span>' : ''}
+          </div>
+          <div class="msg msg-eu">
+            <span class="msg-nome">Tu${t.postura ? ` · a tua resposta foi ${esc(postura[t.postura])}` : ''}</span>
+            <p>${esc(semAspas(t.texto))}</p>
+          </div>
+          ${t.resposta ? `
+          <div class="msg msg-outro">
+            <span class="msg-nome">${esc(nomeCurto())}</span>
+            <p>${esc(t.resposta)}</p>
+          </div>` : ''}
+          ${percecoes.length ? `<div class="rever-percecoes">${percecoes.map((l) => `<p>${l}</p>`).join('')}</div>` : ''}
         </li>`;
     }).join('');
     return `
