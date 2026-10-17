@@ -397,18 +397,8 @@ a.pausa { text-decoration: none; display: inline-block; }
 .msg-nome { display: block; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 2px; }
 .msg-eu { background: var(--eu); align-self: flex-start; border-bottom-left-radius: 4px; }
 .msg-outro { background: var(--outro); align-self: flex-end; border-bottom-right-radius: 4px; }
-.msg-pensa {
-  align-self: flex-start;
-  background: var(--eu-suave);
-  border-style: dashed;
-  border-radius: 22px;
-  font-style: italic;
-  margin-left: 18px;
-}
-.msg-pensa .msg-nome { font-style: normal; }
 .msg-narra { align-self: center; text-align: center; font-size: 15px; font-style: italic; color: #5a5270; max-width: 90%; }
 .msg-nota { align-self: center; text-align: center; font-size: 14px; font-weight: 500; color: #5a5270; max-width: 90%; }
-.msg-sente { align-self: flex-start; font-size: 15px; font-weight: 500; margin-left: 18px !important; }
 .conversa .contexto { font-size: 16px; }
 
 .codigo {

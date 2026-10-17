@@ -152,9 +152,6 @@
     if (r.quem === 'contexto') return `<p class="contexto">${esc(r.texto)}</p>`;
     if (r.quem === 'narra') return `<p class="msg-narra">${esc(r.texto)}</p>`;
     if (r.quem === 'nota') return `<p class="msg-nota">${esc(r.texto)}</p>`;
-    if (r.quem === 'aviso') return `<p class="msg-nota aviso">${esc(r.texto)}</p>`;
-    if (r.quem === 'sente') return `<p class="msg-sente">Sentiste: ${esc(r.texto)}</p>`;
-    if (r.quem === 'pensa') return `<p class="msg-sente">Pensaste: ${esc(r.texto)}</p>`;
     const outro = r.quem === 'outro';
     return `
       <div class="msg ${outro ? 'msg-outro' : 'msg-eu'}">
@@ -234,8 +231,14 @@
       </div>`;
   }
 
+  // O que acontece na pausa fica na zona de baixo: a conversa termina sempre na última fala do outro.
   function desenharPausa2() {
+    const nomeou = rotuloPausa
+      ? `Deste um nome ao que sentes: ${esc(rotuloPausa.toLowerCase())}. A raiva desceu um pouco.`
+      : 'A raiva desceu ligeiramente.';
     painel.innerHTML = `
+      <p class="narracao">${nomeou}</p>
+      ${estado.avisos.map((a) => `<p class="aviso">${esc(a)}</p>`).join('')}
       <div class="opcoes">
         <button class="opcao" data-acao="distanciar">Olhar para a cena de fora</button>
         <button class="opcao" data-acao="voltar">Voltar à conversa</button>
@@ -244,6 +247,7 @@
 
   function desenharDistanciamento() {
     painel.innerHTML = `
+      <p class="narracao">${esc(estado.cen.distanciamento)}</p>
       <div class="opcoes"><button class="opcao" data-acao="voltar">Voltar à conversa</button></div>`;
   }
 
@@ -549,10 +553,8 @@
       guardar();
       modo = 'menu';
     } else if (b.dataset.sentir) {
-      const em = EMOCOES[b.dataset.sentir];
       Registo.evento('sentir', Object.assign(momento(), { emocao: b.dataset.sentir, ms: ms() }));
       Motor.sentir(estado, b.dataset.sentir);
-      registo.push({ quem: 'sente', texto: `${em.emoji} ${em.nome.toLowerCase()}` });
       pensar(b.dataset.sentir);
       modo = faseResposta();
     } else if (acao === 'sem-emocao') {
@@ -566,18 +568,10 @@
       rotuloPausa = b.dataset.emocao || null;
       Registo.evento('pausa', Object.assign(momento(), { rotulo: rotuloPausa, ms: ms() }));
       Motor.pausa(estado, rotuloPausa);
-      registo.push({
-        quem: 'nota',
-        texto: rotuloPausa
-          ? `Pausa. Deste um nome ao que sentes: ${rotuloPausa.toLowerCase()}. A raiva desceu um pouco.`
-          : 'Pausa. A raiva desceu ligeiramente.'
-      });
-      for (const a of estado.avisos) registo.push({ quem: 'aviso', texto: a });
       modo = 'pausa2';
     } else if (acao === 'distanciar') {
       Registo.evento('distanciar', momento());
       Motor.distanciar(estado);
-      registo.push({ quem: 'narra', texto: estado.cen.distanciamento });
       modo = 'distancia';
     } else if (acao === 'voltar') {
       modo = voltarPara;
@@ -601,9 +595,8 @@
         i, texto: op.texto, tipo: op.tipo, postura: op.postura || null, visiveis: visiveis(), ms: ms()
       }));
       if (op.tipo === 'leitura' || op.tipo === 'reacao') {
-        // A primeira reação e a leitura do outro são pensamentos, não falas.
+        // A primeira reação e a leitura do outro são pensamentos, não entram na conversa.
         Motor.escolher(estado, i);
-        registo.push({ quem: 'pensa', texto: semAspas(op.texto) });
         ouvirNo(false);
       } else if (estado.marcas.sabe) {
         // Depois de o outro explicar o que se passa, já não há reação a prever.
