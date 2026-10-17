@@ -257,7 +257,7 @@ window.CENARIOS.grupo = {
           },
           opcoes: [
             { texto: '«Ainda bem que dizes a verdade. Mas isto deixa o grupo pendurado. O que precisavas para pegar nisto esta noite?»', tipo: 'colaborar', postura: 'assertiva', reage: 'abre', ouviu: 'que a honestidade conta, e o problema também', efeitos: { outro: -1, relacao: 2 }, vai: 'plano' },
-            { texto: '«Isso irrita-me. Não é justo para nós, e tu sabes.»', tipo: 'colaborar', postura: 'assertiva', reage: 'defende', ouviu: 'o impacto no grupo, dito sem ataque', efeitos: { outro: 1, relacao: 1 }, vai: 'impacto' },
+            { texto: '«Podias ter dito, não é justo para nós não dizeres nada.»', tipo: 'colaborar', postura: 'assertiva', reage: 'defende', ouviu: 'o impacto no grupo, dito sem ataque', efeitos: { outro: 1, relacao: 1 }, vai: 'impacto' },
             { texto: '«Perdeste a vontade porquê? Aconteceu alguma coisa com o projeto?»', tipo: 'colaborar', postura: 'assertiva', reage: 'abre', ouviu: 'interesse pelo que ele sente em relação ao projeto', requer: { euMax: 4 }, efeitos: { outro: -1, relacao: 1 }, vai: 'plano' },
             { texto: '«Isso dá-me muita raiva. Mas quero perceber: o que te fez perder a vontade?»', tipo: 'colaborar', postura: 'assertiva', reage: 'justifica', ouviu: 'raiva, e uma pergunta a sério', requer: { euMin: 5 }, efeitos: { relacao: 1, eu: -1 }, vai: 'plano' },
             { texto: '«Pronto, eu faço.»', tipo: 'ceder', postura: 'passiva', reage: 'nada', ouviu: 'que alguém resolve por ele', efeitos: { adiado: 1 }, vai: 'fim_ceder' },

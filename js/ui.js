@@ -6,7 +6,7 @@
 
   // Previsões: antes de dizer, o que a resposta vai fazer ao outro.
   // Depois de o outro reagir, o que aconteceu à tua raiva (o medidor só mostra depois).
-  const REAGE = { abre: 'Abre-se', justifica: 'Justifica-se', defende: 'Defende-se', afasta: 'Afasta-se', nada: 'Não dá por nada' };
+  const REAGE = { abre: 'Aproxima-se', justifica: 'Justifica-se', defende: 'Defende-se', afasta: 'Afasta-se', nada: 'Não dá por nada' };
   const EU_PREV = { sobe: 'Subiu', igual: 'Ficou igual', desce: 'Desceu' };
 
   const POSTURAS = [
@@ -237,6 +237,47 @@
     return `<ul>${itens.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>`;
   }
 
+  // A conversa outra vez, resposta a resposta: o que disseste, como foi ouvido,
+  // o que previste e o que aconteceu. Fechada por omissão, abre-se se quiseres.
+  function rever(conversa) {
+    if (!conversa || !conversa.some((t) => !t.pausa)) return '';
+    const postura = Object.fromEntries(POSTURAS.map(([k, v]) => [k, v.slice(0, -1).toLowerCase()]));
+    const reage = (k) => REAGE[k].toLowerCase();
+    let n = 0;
+    const itens = conversa.map((t) => {
+      if (t.pausa) {
+        return `<li class="rever-pausa">Pausa${t.rotulo ? `: deste o nome «${esc(t.rotulo.toLowerCase())}» ao que sentias` : ''}${t.distanciou ? ', e olhaste para a cena de fora' : ''}.</li>`;
+      }
+      n += 1;
+      const linhas = [];
+      if (t.ouviu) linhas.push(`${esc(maiusc(ref('o')))} ouviu ${esc(t.ouviu)}.`);
+      if (t.outroPrev) {
+        const certo = t.outroPrev === t.outroReal;
+        linhas.push(`Previste: ${esc(reage(t.outroPrev))}. Aconteceu: ${esc(reage(t.outroReal))}.${certo ? '' : ' <span class="rever-falhou">Não era o que esperavas.</span>'}`);
+      }
+      if (t.euAntes !== t.euDepois || t.euPrev) {
+        const real = t.euDepois > t.euAntes ? 'sobe' : t.euDepois < t.euAntes ? 'desce' : 'igual';
+        const disseste = t.euPrev ? ` Disseste que ${EU_PREV[t.euPrev].toLowerCase()}${t.euPrev === real ? '' : ', mas não foi isso'}.` : '';
+        linhas.push(`A tua raiva: ${t.euAntes === t.euDepois ? `ficou em ${t.euAntes}` : `de ${t.euAntes} para ${t.euDepois}`}.${disseste}`);
+      }
+      if (t.postura) linhas.push(`Postura: ${esc(postura[t.postura])}.`);
+      const tapada = t.tapadas && t.tapadas[0]
+        ? `<p class="rever-tapada">Com menos raiva, também podias ter dito: «${esc(semAspas(t.tapadas[0]))}»</p>` : '';
+      return `
+        <li>
+          <p class="rever-tu"><span class="rever-n">${n}</span> Tu: ${esc(t.texto)}</p>
+          ${linhas.map((l) => `<p>${l}</p>`).join('')}
+          ${t.resposta ? `<p class="rever-outro">${esc(nomeCurto())}: ${esc(t.resposta)}</p>` : ''}
+          ${tapada}
+        </li>`;
+    }).join('');
+    return `
+      <details class="rever">
+        <summary>Rever a conversa, resposta a resposta</summary>
+        <ol>${itens}</ol>
+      </details>`;
+  }
+
   // Final de um cenário: o que aconteceu, o balanço, e pouco mais.
   function desenharFim() {
     const no = Motor.atual(estado);
@@ -262,6 +303,7 @@
         <div><h4>O que ganhaste</h4>${lista(no.balanco ? no.balanco.ganhos : [])}</div>
         <div><h4>O que perdeste</h4>${lista(perdas)}</div>
       </div>
+      ${rever(r.conversa)}
       ${r.textosEscondidos.length ? `
       <div class="escondidas-fim">
         <h4>Com menos raiva, estas respostas estavam ao teu alcance</h4>

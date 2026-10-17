@@ -11,7 +11,7 @@ const Motor = require(path.join(raiz, 'js', 'motor.js'));
 const esc = (s) => String(s == null ? '' : s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const sinal = (v) => (v ? (v > 0 ? `+${v}` : `${v}`) : '');
 const POSTURA = { assertiva: 'Assertiva', agressiva: 'Agressiva', passiva: 'Passiva', 'passivo-agressiva': 'Passivo-agressiva' };
-const REAGE = { abre: 'abre-se', justifica: 'justifica-se', defende: 'defende-se', afasta: 'afasta-se', nada: 'não dá por nada' };
+const REAGE = { abre: 'aproxima-se', justifica: 'justifica-se', defende: 'defende-se', afasta: 'afasta-se', nada: 'não dá por nada' };
 
 // Percorre todos os caminhos (sem pausas) para saber com que raiva se chega a cada momento
 // e que respostas chegam a estar disponíveis. Chave: verdade|momento.
@@ -184,7 +184,7 @@ const html = `<!doctype html>
     <li><b>Contágio:</b> com o outro em ${7} ou mais, a tua raiva sobe 1 em cada momento novo. <b>Explosão:</b> o outro chega a ${Motor.MAX} e salta para o final da explosão.</li>
     <li><b>Pausa:</b> nomear a emoção −2 (−1 com «Não sei bem»), olhar de fora −1. A partir da terceira pausa, o outro sobe 1.</li>
     <li><b>«Chegas aqui com raiva...»</b> é calculado percorrendo todos os caminhos possíveis, sem pausas (as pausas só baixam). <b>«nunca aparece»</b> marca respostas que nenhum caminho torna disponíveis.</li>
-    <li>Os números de cada resposta somam-se ao valor atual, sempre entre 0 e 10. A reação do outro (abre-se, justifica-se...) é a resposta certa na previsão.</li>
+    <li>Os números de cada resposta somam-se ao valor atual, sempre entre 0 e 10. A reação do outro (aproxima-se, justifica-se...) é a resposta certa na previsão.</li>
   </ul>
 </div>
 ${cens.map(cenario).join('')}

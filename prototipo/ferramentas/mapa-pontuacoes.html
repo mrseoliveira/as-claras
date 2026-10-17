@@ -1,0 +1,1803 @@
+<!doctype html>
+<html lang="pt"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mapa das pontuações</title>
+<style>
+  body { font: 15px/1.45 -apple-system, system-ui, sans-serif; color: #231d33; background: #fbf7ef; margin: 0; padding: 24px; }
+  main { max-width: 1200px; margin: 0 auto; }
+  h1 { margin: 0 0 4px; } h2 { margin: 40px 0 8px; padding-top: 12px; border-top: 3px solid #231d33; }
+  h3 { margin: 0 0 6px; font-size: 16px; } h4 { margin: 12px 0 4px; font-size: 14px; }
+  .regras { background: #fff; border: 2px solid #231d33; border-radius: 12px; padding: 12px 18px; }
+  .regras li { margin: 3px 0; }
+  nav a { margin-right: 14px; }
+  .no { background: #fff; border: 1px solid #d8cfbf; border-radius: 10px; padding: 12px 14px; margin: 12px 0; scroll-margin-top: 12px; }
+  .no:target { outline: 3px solid #7a5cc7; }
+  .fim { background: #f1ede4; }
+  .fala { font-weight: 600; margin: 4px 0; } .fala.var { font-weight: 400; font-style: italic; }
+  .narr { font-style: italic; margin: 4px 0; } .entrada { font-size: 13px; color: #7a5cc7; margin: 2px 0; }
+  table { width: 100%; border-collapse: collapse; margin-top: 6px; font-size: 14px; }
+  th, td { text-align: left; padding: 5px 6px; border-bottom: 1px solid #eee4d3; vertical-align: top; }
+  th { font-size: 12px; text-transform: uppercase; letter-spacing: .03em; color: #6b6280; }
+  td.txt { width: 38%; } td.n { text-align: center; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .p { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: 12px; font-weight: 600; background: #eee; white-space: nowrap; }
+  .p-assertiva { background: #c9efe9; } .p-agressiva { background: #ffd0cc; } .p-passiva { background: #e3e0ee; } .p-passivo-agressiva { background: #ffe7a8; }
+  .chega { font-size: 13px; font-weight: 600; margin: 2px 0 4px; }
+  .nunca { color: #fff; background: #c2362b; border-radius: 999px; padding: 0 7px; font-size: 11px; font-weight: 700; white-space: nowrap; }
+  .alta { color: #c2362b; font-weight: 600; white-space: nowrap; } .sempre { color: #6b6280; }
+  .tag { font-size: 11px; font-weight: 600; background: #231d33; color: #fff; border-radius: 999px; padding: 1px 8px; vertical-align: 2px; }
+</style></head><body><main>
+<h1>Mapa das pontuações</h1>
+<p>Gerado a partir dos dados do jogo a 17/10/2026, 15:42:05. Voltar a gerar depois de mudar frases: <code>node ferramentas/gerar-mapa.js</code></p>
+<nav><a href="#grupo">Cenário 1</a><a href="#amiga">Cenário 2</a><a href="#docente">Cenário 3</a></nav>
+<div class="regras">
+  <h3>Como funcionam os números</h3>
+  <ul>
+    <li><b>Dois medidores de raiva, de 0 a 10:</b> o teu e o do outro. A relação (0 a 10) está escondida e só pesa nos finais.</li>
+    <li><b>Três faixas da tua raiva:</b> 0 a 3 calma, 4 a 6 tensa, 7 a 10 alta. A faixa decide o pensamento que aparece em «Por dentro».</li>
+    <li><b>Quando aparece cada resposta:</b> «sempre», «raiva até N» (acima de N fica desfocada, não te ocorre) ou «raiva N ou mais» (só aparece com raiva alta).</li>
+    <li><b>Contágio:</b> com o outro em 7 ou mais, a tua raiva sobe 1 em cada momento novo. <b>Explosão:</b> o outro chega a 10 e salta para o final da explosão.</li>
+    <li><b>Pausa:</b> nomear a emoção −2 (−1 com «Não sei bem»), olhar de fora −1. A partir da terceira pausa, o outro sobe 1.</li>
+    <li><b>«Chegas aqui com raiva...»</b> é calculado percorrendo todos os caminhos possíveis, sem pausas (as pausas só baixam). <b>«nunca aparece»</b> marca respostas que nenhum caminho torna disponíveis.</li>
+    <li>Os números de cada resposta somam-se ao valor atual, sempre entre 0 e 10. A reação do outro (aproxima-se, justifica-se...) é a resposta certa na previsão.</li>
+  </ul>
+</div>
+
+    <section class="cenario" id="grupo">
+      <h2>Cenário 1 · A véspera da entrega</h2>
+      <p>Começas com raiva 2, Tomás com 2. Verdades possíveis: trabalho, desinteresse.</p>
+      
+    <table>
+      <thead><tr><th>Primeira reação</th><th>Gatilho</th><th>A tua raiva começa em</th></tr></thead>
+      <tbody><tr><td class="txt">Não é justo. Eu fiz a minha parte e ele não fez a dele.</td><td>injustiça</td><td class="n">3</td></tr><tr><td class="txt">Vou chumbar por causa dele. O ano todo em risco por uma secção.</td><td>ameaça</td><td class="n">3</td></tr><tr><td class="txt">Nem se deu ao trabalho de avisar.</td><td>desrespeito</td><td class="n">3</td></tr><tr><td class="txt">O que terá acontecido? Será que ainda vai preencher?</td><td>curiosidade</td><td class="n">2</td></tr><tr><td class="txt">Prefiro fazer eu do que estar neste stress.</td><td>evitamento</td><td class="n">2</td></tr></tbody>
+    </table>
+      
+      <section id="grupo-chegada" class="no">
+        <h3>23:12 · Olá!</h3>
+        
+        <p class="chega">Chegas aqui com raiva 2 a 3</p>
+        <p class="narr">O Tomás entra na sala de estudo.</p>
+        <p class="fala">Tomás: «Olá!»</p>
+        
+        
+        
+    <table>
+      <thead><tr><th>Resposta</th><th>Postura</th><th>Aparece</th><th>Tu</th><th>Tomás</th><th>Relação</th><th>Reação</th><th>Segue para</th></tr></thead>
+      <tbody><tr>
+          <td class="txt">«Olá. Estive a ver o documento e a parte dos testes ainda não está lá. O que se passou?»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n">+1</td>
+          <td class="n"></td>
+          <td>justifica-se</td>
+          <td><a href="#grupo-pergunta">23:15 · Pois... não consegui. Tive umas semanas complicadas.</a></td>
+        </tr><tr>
+          <td class="txt">«Só agora? A tua parte está vazia!»</td>
+          <td><span class="p p-agressiva">Agressiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n">+1</td>
+          <td class="n">+2</td>
+          <td class="n">-1</td>
+          <td>defende-se</td>
+          <td><a href="#grupo-defensivo">23:14 · Eu disse no grupo que tratava disso. Não precisas de fala...</a></td>
+        </tr><tr>
+          <td class="txt">«Olá.»</td>
+          <td><span class="p p-passiva">Passiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td>não dá por nada</td>
+          <td><a href="#grupo-evitar1">23:40 · Então, está tudo pronto para amanhã?</a></td>
+        </tr><tr>
+          <td class="txt">«Estás a gozar comigo? Só faltam dez horas e ainda não temos nada da tua parte!»</td>
+          <td><span class="p p-agressiva">Agressiva</span></td>
+          <td><span class="alta">raiva 3 ou mais</span></td>
+          <td class="n">+1</td>
+          <td class="n">+2</td>
+          <td class="n">-2</td>
+          <td>defende-se</td>
+          <td><a href="#grupo-defensivo">23:14 · Eu disse no grupo que tratava disso. Não precisas de fala...</a></td>
+        </tr><tr>
+          <td class="txt">«Isto está a deixar-me com muita raiva, Tomás. A tua parte está em branco e a entrega é amanhã. Preciso de perceber o que se passou. Se não conseguirmos resolver isto esta noite, vou ter de avisar o professor.»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="alta">raiva 3 ou mais</span></td>
+          <td class="n">-1</td>
+          <td class="n">+1</td>
+          <td class="n"></td>
+          <td>justifica-se</td>
+          <td><a href="#grupo-pergunta">23:15 · Pois... não consegui. Tive umas semanas complicadas.</a></td>
+        </tr></tbody>
+    </table>
+        
+      </section>
+      <section id="grupo-pergunta" class="no">
+        <h3>23:15 · Pois... não consegui. Tive umas semanas complicadas. <span class="tag">leitura do outro</span></h3>
+        
+        <p class="chega">Chegas aqui com raiva 2 a 10</p>
+        <p class="narr">O Tomás hesita e olha para o chão.</p>
+        <p class="fala">Tomás: «Pois... não consegui. Tive umas semanas complicadas.»</p>
+        
+        <p class="narr">Pergunta: O que achas que se passa com o Tomás neste momento?</p>
+        
+    <table>
+      <thead><tr><th>Resposta</th><th>Postura</th><th>Aparece</th><th>Tu</th><th>Tomás</th><th>Relação</th><th>Reação</th><th>Segue para</th></tr></thead>
+      <tbody><tr>
+          <td class="txt">Tem vergonha e não sabe como dizer.</td>
+          <td><span class="p">leitura</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td class="n">+1</td>
+          <td></td>
+          <td><a href="#grupo-escuta">23:16 · Ficas à espera. O Tomás continua a olhar para o chão.</a></td>
+        </tr><tr>
+          <td class="txt">Não está muito preocupado com isto.</td>
+          <td><span class="p">leitura</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td class="n">+1</td>
+          <td></td>
+          <td><a href="#grupo-escuta">23:16 · Ficas à espera. O Tomás continua a olhar para o chão.</a></td>
+        </tr><tr>
+          <td class="txt">Está a gozar comigo.</td>
+          <td><span class="p">leitura</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n">+1</td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td></td>
+          <td><a href="#grupo-desconfia">23:16 · Esquece. Não vale a pena explicar.</a></td>
+        </tr></tbody>
+    </table>
+        
+      </section>
+      <section id="grupo-defensivo" class="no">
+        <h3>23:14 · Eu disse no grupo que tratava disso. Não precisas de fala...</h3>
+        <p class="entrada">Ao entrar neste momento: tu +1</p>
+        <p class="chega">Chegas aqui com raiva 4 a 6 (já com o efeito da fala do outro)</p>
+        <p class="narr">O Tomás cruza os braços.</p>
+        <p class="fala">Tomás: «Eu disse no grupo que tratava disso. Não precisas de falar assim.»</p>
+        
+        
+        
+    <table>
+      <thead><tr><th>Resposta</th><th>Postura</th><th>Aparece</th><th>Tu</th><th>Tomás</th><th>Relação</th><th>Reação</th><th>Segue para</th></tr></thead>
+      <tbody><tr>
+          <td class="txt">«Disseste há duas semanas. E depois, nada.»</td>
+          <td><span class="p p-agressiva">Agressiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n">+1</td>
+          <td class="n">+1</td>
+          <td class="n">-1</td>
+          <td>defende-se</td>
+          <td><a href="#grupo-escalada">23:17 · Achas que és a única pessoa com problemas? Não sabes nada...</a></td>
+        </tr><tr>
+          <td class="txt">«Desculpa, Tomás. Estou com raiva e não estou a conseguir gerir isto bem. Não era assim que queria começar.»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n">-1</td>
+          <td class="n">-2</td>
+          <td class="n">+2</td>
+          <td>justifica-se</td>
+          <td><a href="#grupo-pergunta">23:15 · Pois... não consegui. Tive umas semanas complicadas.</a></td>
+        </tr><tr>
+          <td class="txt">«Tens razão, comecei mal. Estou em pânico com a entrega. O que se passou?»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td>raiva até 4</td>
+          <td class="n"></td>
+          <td class="n">-1</td>
+          <td class="n">+1</td>
+          <td>justifica-se</td>
+          <td><a href="#grupo-pergunta">23:15 · Pois... não consegui. Tive umas semanas complicadas.</a></td>
+        </tr><tr>
+          <td class="txt">«Pronto, esquece. Eu faço.»</td>
+          <td><span class="p p-passivo-agressiva">Passivo-agressiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td class="n">-1</td>
+          <td>afasta-se</td>
+          <td><a href="#grupo-fim_ceder">Final: Entregue, e a conta ficou do teu lado</a></td>
+        </tr><tr>
+          <td class="txt">«Falo como me apetecer. Foste tu que estragaste isto.»</td>
+          <td><span class="p p-agressiva">Agressiva</span></td>
+          <td><span class="alta">raiva 5 ou mais</span></td>
+          <td class="n">+1</td>
+          <td class="n">+2</td>
+          <td class="n">-2</td>
+          <td>defende-se</td>
+          <td><a href="#grupo-escalada">23:17 · Achas que és a única pessoa com problemas? Não sabes nada...</a></td>
+        </tr><tr>
+          <td class="txt">«O tom saiu mal. Mas estou com raiva porque isto afeta a nota de todos. O que aconteceu?»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="alta">raiva 5 ou mais</span></td>
+          <td class="n">-1</td>
+          <td class="n">-1</td>
+          <td class="n"></td>
+          <td>justifica-se</td>
+          <td><a href="#grupo-pergunta">23:15 · Pois... não consegui. Tive umas semanas complicadas.</a></td>
+        </tr></tbody>
+    </table>
+        
+      </section>
+      <section id="grupo-evitar1" class="no">
+        <h3>23:40 · Então, está tudo pronto para amanhã?</h3>
+        <p class="entrada">Ao entrar neste momento: tu +1</p>
+        <p class="chega">Chegas aqui com raiva 3 a 4 (já com o efeito da fala do outro)</p>
+        <p class="narr">O Tomás senta-se e abre o portátil.</p>
+        <p class="fala">Tomás: «Então, está tudo pronto para amanhã?»</p>
+        
+        
+        
+    <table>
+      <thead><tr><th>Resposta</th><th>Postura</th><th>Aparece</th><th>Tu</th><th>Tomás</th><th>Relação</th><th>Reação</th><th>Segue para</th></tr></thead>
+      <tbody><tr>
+          <td class="txt">«Sim, sim. Quase.»</td>
+          <td><span class="p p-passiva">Passiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td class="n">-1</td>
+          <td>não dá por nada</td>
+          <td><a href="#grupo-evitar2">00:30 · Bom, vou andando. Até amanhã!</a></td>
+        </tr><tr>
+          <td class="txt">«Na verdade, não. A tua parte ainda não está feita.»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td>raiva até 5</td>
+          <td class="n"></td>
+          <td class="n">+1</td>
+          <td class="n"></td>
+          <td>justifica-se</td>
+          <td><a href="#grupo-pergunta">23:15 · Pois... não consegui. Tive umas semanas complicadas.</a></td>
+        </tr><tr>
+          <td class="txt">«Quase. Vi que a tua parte ainda está vazia. Está tudo bem contigo?»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td>raiva até 4</td>
+          <td class="n"></td>
+          <td class="n">+1</td>
+          <td class="n"></td>
+          <td>justifica-se</td>
+          <td><a href="#grupo-pergunta">23:15 · Pois... não consegui. Tive umas semanas complicadas.</a></td>
+        </tr><tr>
+          <td class="txt">«Não está, e estou com raiva por isso. Mas primeiro quero perceber: o que aconteceu?»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="alta">raiva 4 ou mais</span></td>
+          <td class="n">-1</td>
+          <td class="n">+1</td>
+          <td class="n"></td>
+          <td>justifica-se</td>
+          <td><a href="#grupo-pergunta">23:15 · Pois... não consegui. Tive umas semanas complicadas.</a></td>
+        </tr><tr>
+          <td class="txt">«Pronto?! A tua parte está em branco!»</td>
+          <td><span class="p p-agressiva">Agressiva</span></td>
+          <td><span class="alta">raiva 4 ou mais</span></td>
+          <td class="n">+1</td>
+          <td class="n">+2</td>
+          <td class="n">-1</td>
+          <td>defende-se</td>
+          <td><a href="#grupo-defensivo">23:14 · Eu disse no grupo que tratava disso. Não precisas de fala...</a></td>
+        </tr><tr>
+          <td class="txt">«Não está. E estou a fazer um esforço para não explodir. A tua parte está em branco.»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="alta">raiva 4 ou mais</span></td>
+          <td class="n"></td>
+          <td class="n">+1</td>
+          <td class="n"></td>
+          <td>justifica-se</td>
+          <td><a href="#grupo-pergunta">23:15 · Pois... não consegui. Tive umas semanas complicadas.</a></td>
+        </tr></tbody>
+    </table>
+        
+      </section>
+      <section id="grupo-escuta" class="no">
+        <h3>23:16 · Ficas à espera. O Tomás continua a olhar para o chão.</h3>
+        
+        <p class="chega">Chegas aqui com raiva 2 a 10</p>
+        <p class="narr">Ficas à espera. O Tomás continua a olhar para o chão.</p>
+        
+        
+        
+        
+    <table>
+      <thead><tr><th>Resposta</th><th>Postura</th><th>Aparece</th><th>Tu</th><th>Tomás</th><th>Relação</th><th>Reação</th><th>Segue para</th></tr></thead>
+      <tbody><tr>
+          <td class="txt">«Complicadas como? Não precisas de contar tudo, mas ajudava perceber.»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n">-1</td>
+          <td class="n"></td>
+          <td>aproxima-se</td>
+          <td><a href="#grupo-revelacao">23:21 · Comecei a trabalhar num restaurante, três noites por sema...</a></td>
+        </tr><tr>
+          <td class="txt">«Toda a gente tem semanas complicadas. A entrega é amanhã.»</td>
+          <td><span class="p p-agressiva">Agressiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n">+1</td>
+          <td class="n">+1</td>
+          <td class="n">-1</td>
+          <td>defende-se</td>
+          <td><a href="#grupo-escalada">23:17 · Achas que és a única pessoa com problemas? Não sabes nada...</a></td>
+        </tr><tr>
+          <td class="txt">«Ok, não faz mal. Eu trato disso.»</td>
+          <td><span class="p p-passiva">Passiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td>não dá por nada</td>
+          <td><a href="#grupo-fim_ceder">Final: Entregue, e a conta ficou do teu lado</a></td>
+        </tr></tbody>
+    </table>
+        
+      </section>
+      <section id="grupo-desconfia" class="no">
+        <h3>23:16 · Esquece. Não vale a pena explicar.</h3>
+        <p class="entrada">Ao entrar neste momento: tu +1</p>
+        <p class="chega">Chegas aqui com raiva 4 a 10 (já com o efeito da fala do outro)</p>
+        <p class="narr">Olhas para ele à espera da desculpa. Ele percebe.</p>
+        <p class="fala">Tomás: «Esquece. Não vale a pena explicar.»</p>
+        
+        
+        
+    <table>
+      <thead><tr><th>Resposta</th><th>Postura</th><th>Aparece</th><th>Tu</th><th>Tomás</th><th>Relação</th><th>Reação</th><th>Segue para</th></tr></thead>
+      <tbody><tr>
+          <td class="txt">«Semanas complicadas. Claro.»</td>
+          <td><span class="p p-passivo-agressiva">Passivo-agressiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n">+1</td>
+          <td class="n">+2</td>
+          <td class="n">-1</td>
+          <td>defende-se</td>
+          <td><a href="#grupo-escalada">23:17 · Achas que és a única pessoa com problemas? Não sabes nada...</a></td>
+        </tr><tr>
+          <td class="txt">«Desculpa. A raiva está a fazer-me ouvir tudo como uma desculpa. Quero mesmo saber o que se passou.»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n">-1</td>
+          <td class="n">-2</td>
+          <td class="n">+2</td>
+          <td>aproxima-se</td>
+          <td><a href="#grupo-revelacao">23:21 · Comecei a trabalhar num restaurante, três noites por sema...</a></td>
+        </tr><tr>
+          <td class="txt">«Estou com raiva e se calhar notou-se. Mas quero mesmo perceber.»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="alta">raiva 5 ou mais</span></td>
+          <td class="n">-1</td>
+          <td class="n">-1</td>
+          <td class="n"></td>
+          <td>aproxima-se</td>
+          <td><a href="#grupo-revelacao">23:21 · Comecei a trabalhar num restaurante, três noites por sema...</a></td>
+        </tr><tr>
+          <td class="txt">«Vale a pena, sim. Complicadas como?»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td>raiva até 4</td>
+          <td class="n"></td>
+          <td class="n">-1</td>
+          <td class="n"></td>
+          <td>aproxima-se</td>
+          <td><a href="#grupo-revelacao">23:21 · Comecei a trabalhar num restaurante, três noites por sema...</a></td>
+        </tr><tr>
+          <td class="txt">«Ok, eu faço.»</td>
+          <td><span class="p p-passiva">Passiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td>afasta-se</td>
+          <td><a href="#grupo-fim_ceder">Final: Entregue, e a conta ficou do teu lado</a></td>
+        </tr></tbody>
+    </table>
+        
+      </section>
+      <section id="grupo-escalada" class="no">
+        <h3>23:17 · Achas que és a única pessoa com problemas? Não sabes nada...</h3>
+        <p class="entrada">Ao entrar neste momento: tu +1</p>
+        <p class="chega">Chegas aqui com raiva 4 a 10 (já com o efeito da fala do outro)</p>
+        <p class="narr">O Tomás levanta a voz.</p>
+        <p class="fala">Tomás: «Achas que és a única pessoa com problemas? Não sabes nada da minha vida.»</p>
+        
+        
+        
+    <table>
+      <thead><tr><th>Resposta</th><th>Postura</th><th>Aparece</th><th>Tu</th><th>Tomás</th><th>Relação</th><th>Reação</th><th>Segue para</th></tr></thead>
+      <tbody><tr>
+          <td class="txt">«Tens razão, não sei. Conta-me.»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td>raiva até 5</td>
+          <td class="n"></td>
+          <td class="n">-2</td>
+          <td class="n">+1</td>
+          <td>aproxima-se</td>
+          <td><a href="#grupo-revelacao">23:21 · Comecei a trabalhar num restaurante, três noites por sema...</a></td>
+        </tr><tr>
+          <td class="txt">«Espera. Desculpa. Estou com raiva e isto está a fugir-me. Podemos recomeçar?»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n">-1</td>
+          <td class="n">-2</td>
+          <td class="n">+2</td>
+          <td>aproxima-se</td>
+          <td><a href="#grupo-revelacao">23:21 · Comecei a trabalhar num restaurante, três noites por sema...</a></td>
+        </tr><tr>
+          <td class="txt">«A tua vida não é problema meu. A tua parte é.»</td>
+          <td><span class="p p-agressiva">Agressiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n">+1</td>
+          <td class="n">+2</td>
+          <td class="n">-2</td>
+          <td>defende-se</td>
+          <td><a href="#grupo-ultimato">23:19 · Queres a parte feita? Então faz tu.</a></td>
+        </tr><tr>
+          <td class="txt">(Não dizes nada e olhas para o ecrã.)</td>
+          <td><span class="p p-passivo-agressiva">Passivo-agressiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n">+1</td>
+          <td class="n">-1</td>
+          <td>afasta-se</td>
+          <td><a href="#grupo-silencio">23:40 · Ficam os dois calados. Ao fim de vinte minutos, o Tomás f...</a></td>
+        </tr><tr>
+          <td class="txt">«Amanhã vou falar com o docente e ele que decida.»</td>
+          <td><span class="p p-agressiva">Agressiva</span></td>
+          <td><span class="alta">raiva 6 ou mais</span></td>
+          <td class="n">+1</td>
+          <td class="n">+2</td>
+          <td class="n">-3</td>
+          <td>afasta-se</td>
+          <td><a href="#grupo-fim_explosao">Final: A porta bateu</a></td>
+        </tr><tr>
+          <td class="txt">«Não sei, é verdade. E neste momento a raiva não me deixa ouvir bem. Dá-me um minuto e conta-me.»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="alta">raiva 6 ou mais</span></td>
+          <td class="n">-1</td>
+          <td class="n">-1</td>
+          <td class="n">+1</td>
+          <td>aproxima-se</td>
+          <td><a href="#grupo-revelacao">23:21 · Comecei a trabalhar num restaurante, três noites por sema...</a></td>
+        </tr></tbody>
+    </table>
+        
+      </section><section id="grupo-fim_ceder" class="no fim"><h3>Final: Entregue, e a conta ficou do teu lado</h3><p class="narr">Escreves a parte do Tomás até às quatro, a partir de notas soltas. O projeto é entregue a horas. O Tomás agradece com um emoji. A irritação não se foi embora, ficou guardada.</p></section>
+      <section id="grupo-evitar2" class="no">
+        <h3>00:30 · Bom, vou andando. Até amanhã!</h3>
+        <p class="entrada">Ao entrar neste momento: tu +1</p>
+        <p class="chega">Chegas aqui com raiva 4 a 5 (já com o efeito da fala do outro)</p>
+        <p class="narr">Meia-noite e meia. O Tomás arruma as coisas. A secção dele continua em branco.</p>
+        <p class="fala">Tomás: «Bom, vou andando. Até amanhã!»</p>
+        
+        
+        
+    <table>
+      <thead><tr><th>Resposta</th><th>Postura</th><th>Aparece</th><th>Tu</th><th>Tomás</th><th>Relação</th><th>Reação</th><th>Segue para</th></tr></thead>
+      <tbody><tr>
+          <td class="txt">«Espera. Antes de ires, temos de falar da tua parte.»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n">+1</td>
+          <td class="n"></td>
+          <td>justifica-se</td>
+          <td><a href="#grupo-pergunta">23:15 · Pois... não consegui. Tive umas semanas complicadas.</a></td>
+        </tr><tr>
+          <td class="txt">«Espera. A tua parte continua em branco. Aconteceu alguma coisa?»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td>raiva até 4</td>
+          <td class="n"></td>
+          <td class="n">+1</td>
+          <td class="n"></td>
+          <td>justifica-se</td>
+          <td><a href="#grupo-pergunta">23:15 · Pois... não consegui. Tive umas semanas complicadas.</a></td>
+        </tr><tr>
+          <td class="txt">«Espera. Estou com raiva por a tua parte estar em branco, mas antes de ires quero perceber o que se passou.»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="alta">raiva 5 ou mais</span></td>
+          <td class="n">-1</td>
+          <td class="n">+1</td>
+          <td class="n"></td>
+          <td>justifica-se</td>
+          <td><a href="#grupo-pergunta">23:15 · Pois... não consegui. Tive umas semanas complicadas.</a></td>
+        </tr><tr>
+          <td class="txt">«Até amanhã.»</td>
+          <td><span class="p p-passiva">Passiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td>não dá por nada</td>
+          <td><a href="#grupo-fim_evitar">Final: Nada foi dito</a></td>
+        </tr><tr>
+          <td class="txt">«Vais embora?! Com a tua parte por fazer?»</td>
+          <td><span class="p p-agressiva">Agressiva</span></td>
+          <td><span class="alta">raiva 5 ou mais</span></td>
+          <td class="n">+1</td>
+          <td class="n">+2</td>
+          <td class="n">-2</td>
+          <td>defende-se</td>
+          <td><a href="#grupo-escalada">23:17 · Achas que és a única pessoa com problemas? Não sabes nada...</a></td>
+        </tr></tbody>
+    </table>
+        
+      </section>
+      <section id="grupo-revelacao" class="no">
+        <h3>23:21 · Comecei a trabalhar num restaurante, três noites por sema... <span class="tag">revelação</span></h3>
+        <p class="entrada">Ao entrar neste momento: Tomás -2, tu -1</p>
+        <p class="chega">Chegas aqui com raiva 1 a 10 (já com o efeito da fala do outro)</p>
+        <p class="narr">O Tomás senta-se.</p>
+        <p class="fala">Tomás: «Comecei a trabalhar num restaurante, três noites por semana. A renda subiu e tive de ser. Não disse nada porque não queria que pensassem que me estava a baldar.»</p>
+        
+        
+        
+    <table>
+      <thead><tr><th>Resposta</th><th>Postura</th><th>Aparece</th><th>Tu</th><th>Tomás</th><th>Relação</th><th>Reação</th><th>Segue para</th></tr></thead>
+      <tbody><tr>
+          <td class="txt">«Ainda bem que me contaste. Isso muda as coisas. Temos até às 9h. O que consegues fazer esta noite?»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n">-1</td>
+          <td class="n">+2</td>
+          <td>aproxima-se</td>
+          <td><a href="#grupo-plano">23:30 · Tenho as gravações dos testes, só não escrevi. Se me ajud...</a></td>
+        </tr><tr>
+          <td class="txt">«Percebo. Mas devias ter dito. Ficámos à espera sem saber de nada.»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n">+1</td>
+          <td class="n">+1</td>
+          <td>defende-se</td>
+          <td><a href="#grupo-impacto">23:23 · Tens razão. Devia ter dito. Desculpa.</a></td>
+        </tr><tr>
+          <td class="txt">«Três noites por semana, mais as aulas. Como é que estás a aguentar isso?»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td>raiva até 4</td>
+          <td class="n"></td>
+          <td class="n">-1</td>
+          <td class="n">+2</td>
+          <td>aproxima-se</td>
+          <td><a href="#grupo-plano">23:30 · Tenho as gravações dos testes, só não escrevi. Se me ajud...</a></td>
+        </tr><tr>
+          <td class="txt">«Ainda estou com raiva por não teres dito. Mas quero perceber: porque achaste que íamos pensar que te estavas a baldar?»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="alta">raiva 5 ou mais</span></td>
+          <td class="n">-1</td>
+          <td class="n"></td>
+          <td class="n">+1</td>
+          <td>justifica-se</td>
+          <td><a href="#grupo-impacto">23:23 · Tens razão. Devia ter dito. Desculpa.</a></td>
+        </tr><tr>
+          <td class="txt">«Não faz mal, vai descansar. Eu escrevo a tua parte.»</td>
+          <td><span class="p p-passiva">Passiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td>não dá por nada</td>
+          <td><a href="#grupo-fim_ceder">Final: Entregue, e a conta ficou do teu lado</a></td>
+        </tr></tbody>
+    </table>
+        <h4>Se a verdade for «desinteresse»</h4><p class="fala">«Sinceramente? Perdi a vontade. O projeto não me diz nada, e achei que vocês faziam isto melhor do que eu.»</p>
+    <table>
+      <thead><tr><th>Resposta</th><th>Postura</th><th>Aparece</th><th>Tu</th><th>Tomás</th><th>Relação</th><th>Reação</th><th>Segue para</th></tr></thead>
+      <tbody><tr>
+          <td class="txt">«Ainda bem que dizes a verdade. Mas isto deixa o grupo pendurado. O que precisavas para pegar nisto esta noite?»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n">-1</td>
+          <td class="n">+2</td>
+          <td>aproxima-se</td>
+          <td><a href="#grupo-plano">23:30 · Tenho as gravações dos testes, só não escrevi. Se me ajud...</a></td>
+        </tr><tr>
+          <td class="txt">«Podias ter dito, não é justo para nós não dizeres nada.»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n">+1</td>
+          <td class="n">+1</td>
+          <td>defende-se</td>
+          <td><a href="#grupo-impacto">23:23 · Tens razão. Devia ter dito. Desculpa.</a></td>
+        </tr><tr>
+          <td class="txt">«Perdeste a vontade porquê? Aconteceu alguma coisa com o projeto?»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td>raiva até 4</td>
+          <td class="n"></td>
+          <td class="n">-1</td>
+          <td class="n">+1</td>
+          <td>aproxima-se</td>
+          <td><a href="#grupo-plano">23:30 · Tenho as gravações dos testes, só não escrevi. Se me ajud...</a></td>
+        </tr><tr>
+          <td class="txt">«Isso dá-me muita raiva. Mas quero perceber: o que te fez perder a vontade?»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="alta">raiva 5 ou mais</span></td>
+          <td class="n">-1</td>
+          <td class="n"></td>
+          <td class="n">+1</td>
+          <td>justifica-se</td>
+          <td><a href="#grupo-plano">23:30 · Tenho as gravações dos testes, só não escrevi. Se me ajud...</a></td>
+        </tr><tr>
+          <td class="txt">«Pronto, eu faço.»</td>
+          <td><span class="p p-passiva">Passiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td>não dá por nada</td>
+          <td><a href="#grupo-fim_ceder">Final: Entregue, e a conta ficou do teu lado</a></td>
+        </tr><tr>
+          <td class="txt">«Então vou dizer ao docente que não fizeste nada.»</td>
+          <td><span class="p p-agressiva">Agressiva</span></td>
+          <td><span class="alta">raiva 5 ou mais</span></td>
+          <td class="n">+1</td>
+          <td class="n">+2</td>
+          <td class="n">-3</td>
+          <td>afasta-se</td>
+          <td><a href="#grupo-fim_explosao">Final: A porta bateu</a></td>
+        </tr></tbody>
+    </table>
+      </section>
+      <section id="grupo-ultimato" class="no">
+        <h3>23:19 · Queres a parte feita? Então faz tu.</h3>
+        <p class="entrada">Ao entrar neste momento: tu +1</p>
+        <p class="chega">Chegas aqui com raiva 7 a 10 (já com o efeito da fala do outro)</p>
+        <p class="narr">O Tomás já tem a mochila na mão.</p>
+        <p class="fala">Tomás: «Queres a parte feita? Então faz tu.»</p>
+        
+        
+        
+    <table>
+      <thead><tr><th>Resposta</th><th>Postura</th><th>Aparece</th><th>Tu</th><th>Tomás</th><th>Relação</th><th>Reação</th><th>Segue para</th></tr></thead>
+      <tbody><tr>
+          <td class="txt">«Espera. Não quero que te vás embora. Quero perceber o que aconteceu.»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td>raiva até 7</td>
+          <td class="n"></td>
+          <td class="n">-2</td>
+          <td class="n">+1</td>
+          <td>aproxima-se</td>
+          <td><a href="#grupo-revelacao">23:21 · Comecei a trabalhar num restaurante, três noites por sema...</a></td>
+        </tr><tr>
+          <td class="txt">«Desculpa. Passei dos limites, a raiva falou por mim. Não te vás embora.»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n">-1</td>
+          <td class="n">-2</td>
+          <td class="n">+2</td>
+          <td>aproxima-se</td>
+          <td><a href="#grupo-revelacao">23:21 · Comecei a trabalhar num restaurante, três noites por sema...</a></td>
+        </tr><tr>
+          <td class="txt">«Vai. Eu faço, como sempre.»</td>
+          <td><span class="p p-passivo-agressiva">Passivo-agressiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n">+1</td>
+          <td class="n">+1</td>
+          <td class="n">-2</td>
+          <td>afasta-se</td>
+          <td><a href="#grupo-fim_explosao">Final: A porta bateu</a></td>
+        </tr><tr>
+          <td class="txt">«Espera. Estou com raiva, mas não quero que te vás embora.»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="alta">raiva 6 ou mais</span></td>
+          <td class="n">-1</td>
+          <td class="n">-1</td>
+          <td class="n">+1</td>
+          <td>aproxima-se</td>
+          <td><a href="#grupo-revelacao">23:21 · Comecei a trabalhar num restaurante, três noites por sema...</a></td>
+        </tr><tr>
+          <td class="txt">«Estou com muita raiva, Tomás. Mas antes de te ires embora, quero perceber o que se passou.»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="alta">raiva 6 ou mais</span></td>
+          <td class="n">-1</td>
+          <td class="n">-1</td>
+          <td class="n"></td>
+          <td>justifica-se</td>
+          <td><a href="#grupo-pergunta">23:15 · Pois... não consegui. Tive umas semanas complicadas.</a></td>
+        </tr><tr>
+          <td class="txt">(Deixas que ele saia.)</td>
+          <td><span class="p p-passiva">Passiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td class="n">-2</td>
+          <td>afasta-se</td>
+          <td><a href="#grupo-fim_explosao">Final: A porta bateu</a></td>
+        </tr></tbody>
+    </table>
+        
+      </section>
+      <section id="grupo-silencio" class="no">
+        <h3>23:40 · Ficam os dois calados. Ao fim de vinte minutos, o Tomás f...</h3>
+        
+        <p class="chega">Chegas aqui com raiva 5 a 10</p>
+        <p class="narr">Ficam os dois calados. Ao fim de vinte minutos, o Tomás fecha o portátil e levanta-se sem dizer nada.</p>
+        
+        
+        
+        
+    <table>
+      <thead><tr><th>Resposta</th><th>Postura</th><th>Aparece</th><th>Tu</th><th>Tomás</th><th>Relação</th><th>Reação</th><th>Segue para</th></tr></thead>
+      <tbody><tr>
+          <td class="txt">«Tomás, espera. Vamos tentar outra vez.»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n">-1</td>
+          <td class="n">+1</td>
+          <td>aproxima-se</td>
+          <td><a href="#grupo-revelacao">23:21 · Comecei a trabalhar num restaurante, três noites por sema...</a></td>
+        </tr><tr>
+          <td class="txt">«Tomás, espera. Antes de ires: o que se passa contigo?»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td>raiva até 5</td>
+          <td class="n"></td>
+          <td class="n">-1</td>
+          <td class="n"></td>
+          <td>justifica-se</td>
+          <td><a href="#grupo-pergunta">23:15 · Pois... não consegui. Tive umas semanas complicadas.</a></td>
+        </tr><tr>
+          <td class="txt">«Espera. Ainda estou com raiva, mas quero perceber o que se passa contigo.»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="alta">raiva 5 ou mais</span></td>
+          <td class="n">-1</td>
+          <td class="n">-1</td>
+          <td class="n"></td>
+          <td>justifica-se</td>
+          <td><a href="#grupo-pergunta">23:15 · Pois... não consegui. Tive umas semanas complicadas.</a></td>
+        </tr><tr>
+          <td class="txt">(Deixas que ele saia.)</td>
+          <td><span class="p p-passiva">Passiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td class="n">-1</td>
+          <td>afasta-se</td>
+          <td><a href="#grupo-fim_evitar">Final: Nada foi dito</a></td>
+        </tr></tbody>
+    </table>
+        
+      </section><section id="grupo-fim_explosao" class="no fim"><h3>Final: A porta bateu</h3><p class="narr">O Tomás pega na mochila. «Faz tu, então.» A porta bate. Escreves a parte dele até às quatro. No dia seguinte, sentam-se em mesas diferentes. O motivo do atraso dele fica por saber.</p></section><section id="grupo-fim_evitar" class="no fim"><h3>Final: Nada foi dito</h3><p class="narr">Às 8h50 a secção continua em branco. Escreves meia página à pressa no autocarro. O grupo entrega um projeto incompleto. Ninguém sabe bem porquê, e o Tomás também não disse.</p></section>
+      <section id="grupo-plano" class="no">
+        <h3>23:30 · Tenho as gravações dos testes, só não escrevi. Se me ajud...</h3>
+        
+        <p class="chega">Chegas aqui com raiva 0 a 10</p>
+        
+        <p class="fala">Tomás: «Tenho as gravações dos testes, só não escrevi. Se me ajudares a organizar, escrevo até às três.»</p>
+        
+        
+        
+    <table>
+      <thead><tr><th>Resposta</th><th>Postura</th><th>Aparece</th><th>Tu</th><th>Tomás</th><th>Relação</th><th>Reação</th><th>Segue para</th></tr></thead>
+      <tbody><tr>
+          <td class="txt">«Combinado. Eu faço a estrutura, tu escreves, eu revejo de manhã.»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td class="n">+1</td>
+          <td>aproxima-se</td>
+          <td><a href="#grupo-fim_colaborar">Final: Entregue, com o Tomás do teu lado</a></td>
+        </tr><tr>
+          <td class="txt">«A estrutura também é contigo. É a tua parte.»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n">+1</td>
+          <td class="n">-1</td>
+          <td>afasta-se</td>
+          <td><a href="#grupo-fim_frio">Final: Entregue, mas mais longe</a></td>
+        </tr><tr>
+          <td class="txt">«Vai para casa. Eu escrevo com as tuas gravações.»</td>
+          <td><span class="p p-passiva">Passiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td>não dá por nada</td>
+          <td><a href="#grupo-fim_ceder">Final: Entregue, e a conta ficou do teu lado</a></td>
+        </tr></tbody>
+    </table>
+        <h4>Se a verdade for «desinteresse»</h4><p class="fala">«Está bem. Tenho as gravações. Escrevo esta noite, mas não esperes nada de especial.»</p>
+    <table>
+      <thead><tr><th>Resposta</th><th>Postura</th><th>Aparece</th><th>Tu</th><th>Tomás</th><th>Relação</th><th>Reação</th><th>Segue para</th></tr></thead>
+      <tbody><tr>
+          <td class="txt">«Combinado. Às duas vejo o que tens e fechamos juntos.»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td class="n">+1</td>
+          <td>aproxima-se</td>
+          <td><a href="#grupo-fim_colaborar">Final: Entregue, com o Tomás do teu lado</a></td>
+        </tr><tr>
+          <td class="txt">«&quot;Nada de especial&quot; não chega. É um terço da nota.»</td>
+          <td><span class="p p-agressiva">Agressiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n">+1</td>
+          <td class="n">+1</td>
+          <td class="n">-1</td>
+          <td>afasta-se</td>
+          <td><a href="#grupo-fim_frio">Final: Entregue, mas mais longe</a></td>
+        </tr><tr>
+          <td class="txt">«Deixa, eu escrevo com as tuas gravações.»</td>
+          <td><span class="p p-passiva">Passiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td>não dá por nada</td>
+          <td><a href="#grupo-fim_ceder">Final: Entregue, e a conta ficou do teu lado</a></td>
+        </tr></tbody>
+    </table>
+      </section>
+      <section id="grupo-impacto" class="no">
+        <h3>23:23 · Tens razão. Devia ter dito. Desculpa.</h3>
+        <p class="entrada">Ao entrar neste momento: Tomás -1, tu -1</p>
+        <p class="chega">Chegas aqui com raiva 0 a 10 (já com o efeito da fala do outro)</p>
+        <p class="narr">O Tomás fica calado uns segundos.</p>
+        <p class="fala">Tomás: «Tens razão. Devia ter dito. Desculpa.»</p>
+        
+        
+        
+    <table>
+      <thead><tr><th>Resposta</th><th>Postura</th><th>Aparece</th><th>Tu</th><th>Tomás</th><th>Relação</th><th>Reação</th><th>Segue para</th></tr></thead>
+      <tbody><tr>
+          <td class="txt">«Ok. E agora, o que consegues fazer esta noite?»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td class="n">+1</td>
+          <td>aproxima-se</td>
+          <td><a href="#grupo-plano">23:30 · Tenho as gravações dos testes, só não escrevi. Se me ajud...</a></td>
+        </tr><tr>
+          <td class="txt">«Da próxima vez diz. O grupo ajustava as tarefas.»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td class="n">+1</td>
+          <td>aproxima-se</td>
+          <td><a href="#grupo-plano">23:30 · Tenho as gravações dos testes, só não escrevi. Se me ajud...</a></td>
+        </tr><tr>
+          <td class="txt">«Desculpa não chega. Escreves tu tudo, esta noite.»</td>
+          <td><span class="p p-agressiva">Agressiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n">+1</td>
+          <td class="n">+1</td>
+          <td class="n">-1</td>
+          <td>afasta-se</td>
+          <td><a href="#grupo-fim_frio">Final: Entregue, mas mais longe</a></td>
+        </tr></tbody>
+    </table>
+        <h4>Se a verdade for «desinteresse»</h4><p class="fala">«Pois. Não é. Não tinha pensado nisso assim.»</p>
+    <table>
+      <thead><tr><th>Resposta</th><th>Postura</th><th>Aparece</th><th>Tu</th><th>Tomás</th><th>Relação</th><th>Reação</th><th>Segue para</th></tr></thead>
+      <tbody><tr>
+          <td class="txt">«Ok. Então o que consegues fazer esta noite?»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td class="n">+1</td>
+          <td>aproxima-se</td>
+          <td><a href="#grupo-plano">23:30 · Tenho as gravações dos testes, só não escrevi. Se me ajud...</a></td>
+        </tr><tr>
+          <td class="txt">«Se o projeto não te diz nada, temos de falar disso no grupo. Mas hoje precisamos da tua parte.»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td class="n">+1</td>
+          <td>aproxima-se</td>
+          <td><a href="#grupo-plano">23:30 · Tenho as gravações dos testes, só não escrevi. Se me ajud...</a></td>
+        </tr><tr>
+          <td class="txt">«Então pensa agora. E escreve.»</td>
+          <td><span class="p p-agressiva">Agressiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n">+1</td>
+          <td class="n">+1</td>
+          <td class="n">-1</td>
+          <td>afasta-se</td>
+          <td><a href="#grupo-fim_frio">Final: Entregue, mas mais longe</a></td>
+        </tr></tbody>
+    </table>
+      </section><section id="grupo-fim_colaborar" class="no fim"><h3>Final: Entregue, com o Tomás do teu lado</h3><p class="narr">Às 2h40 a secção está escrita. De manhã revês tudo e o grupo entrega às 8h55. Na semana seguinte, o Tomás conta ao resto do grupo os turnos no restaurante, e as tarefas são redistribuídas à volta das noites dele.</p></section><section id="grupo-fim_frio" class="no fim"><h3>Final: Entregue, mas mais longe</h3><p class="narr">O Tomás escreve a secção sozinho até às quatro. O projeto é entregue a horas. Nas semanas seguintes, ele responde às mensagens do grupo com uma palavra de cada vez.</p></section>
+    </section>
+    <section class="cenario" id="amiga">
+      <h2>Cenário 2 · O portefólio</h2>
+      <p>Começas com raiva 2, Inês com 2. Verdades possíveis: medo, conviccao.</p>
+      
+    <table>
+      <thead><tr><th>Primeira reação</th><th>Gatilho</th><th>A tua raiva começa em</th></tr></thead>
+      <tbody><tr><td class="txt">Isto é trabalho de artistas a quem ninguém pediu autorização.</td><td>injustiça</td><td class="n">3</td></tr><tr><td class="txt">Vai ficar com a vaga que era para quem desenha.</td><td>ameaça</td><td class="n">3</td></tr><tr><td class="txt">Levei meses a fazer o meu. Isto desvaloriza quem trabalha.</td><td>desrespeito</td><td class="n">3</td></tr><tr><td class="txt">Não concordo com isto. Mas quero perceber porque é que ela o fez.</td><td>curiosidade</td><td class="n">2</td></tr><tr><td class="txt">Não é nada comigo. Digo que está bonito.</td><td>evitamento</td><td class="n">2</td></tr></tbody>
+    </table>
+      
+      <section id="amiga-mostra" class="no">
+        <h3>17:41 · Então? Ficou bom, não ficou? Finalmente tenho um portefól...</h3>
+        
+        <p class="chega">Chegas aqui com raiva 2 a 3</p>
+        
+        <p class="fala">Inês: «Então? Ficou bom, não ficou? Finalmente tenho um portefólio a sério.»</p>
+        
+        
+        
+    <table>
+      <thead><tr><th>Resposta</th><th>Postura</th><th>Aparece</th><th>Tu</th><th>Inês</th><th>Relação</th><th>Reação</th><th>Segue para</th></tr></thead>
+      <tbody><tr>
+          <td class="txt">«Tenho de te dizer uma coisa com franqueza: não concordo com usar IA assim. Mas quero perceber porque escolheste isto.»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n">+1</td>
+          <td class="n"></td>
+          <td>justifica-se</td>
+          <td><a href="#amiga-razoes">17:48 · Olha, é assim que as coisas estão. Os estúdios pedem port...</a></td>
+        </tr><tr>
+          <td class="txt">«Bom? Isto nem é teu, Inês.»</td>
+          <td><span class="p p-agressiva">Agressiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n">+1</td>
+          <td class="n">+2</td>
+          <td class="n">-2</td>
+          <td>defende-se</td>
+          <td><a href="#amiga-ofendida">17:43 · Batota? Toda a gente usa. Tu é que vives noutro século.</a></td>
+        </tr><tr>
+          <td class="txt">«Ficou... sim, ficou bom.»</td>
+          <td><span class="p p-passiva">Passiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td>não dá por nada</td>
+          <td><a href="#amiga-fingir">17:44 · Achas que o estúdio vai gostar? Estava com medo que notas...</a></td>
+        </tr><tr>
+          <td class="txt">«Estou com raiva a olhar para isto, e prefiro dizer-te já: para mim, isto é usar o trabalho de outros artistas. Porque é que o fizeste?»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="alta">raiva 3 ou mais</span></td>
+          <td class="n">-1</td>
+          <td class="n">+2</td>
+          <td class="n"></td>
+          <td>justifica-se</td>
+          <td><a href="#amiga-razoes">17:48 · Olha, é assim que as coisas estão. Os estúdios pedem port...</a></td>
+        </tr><tr>
+          <td class="txt">«Estás a fazer batota e sabes disso.»</td>
+          <td><span class="p p-agressiva">Agressiva</span></td>
+          <td><span class="alta">raiva 3 ou mais</span></td>
+          <td class="n">+1</td>
+          <td class="n">+2</td>
+          <td class="n">-2</td>
+          <td>defende-se</td>
+          <td><a href="#amiga-ofendida">17:43 · Batota? Toda a gente usa. Tu é que vives noutro século.</a></td>
+        </tr></tbody>
+    </table>
+        
+      </section>
+      <section id="amiga-razoes" class="no">
+        <h3>17:48 · Olha, é assim que as coisas estão. Os estúdios pedem port... <span class="tag">leitura do outro</span></h3>
+        
+        <p class="chega">Chegas aqui com raiva 2 a 4</p>
+        <p class="narr">A Inês suspira e olha para o portátil.</p>
+        <p class="fala">Inês: «Olha, é assim que as coisas estão. Os estúdios pedem portefólios enormes e eu não tenho meses.»</p>
+        
+        <p class="narr">Pergunta: O que achas que se passa com a Inês?</p>
+        
+    <table>
+      <thead><tr><th>Resposta</th><th>Postura</th><th>Aparece</th><th>Tu</th><th>Inês</th><th>Relação</th><th>Reação</th><th>Segue para</th></tr></thead>
+      <tbody><tr>
+          <td class="txt">Tem medo de não arranjar emprego.</td>
+          <td><span class="p">leitura</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td class="n">+1</td>
+          <td></td>
+          <td><a href="#amiga-escuta">17:49 · Ficas à espera. A Inês mexe no canto do portátil.</a></td>
+        </tr><tr>
+          <td class="txt">Acredita mesmo que não há mal nenhum.</td>
+          <td><span class="p">leitura</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td class="n">+1</td>
+          <td></td>
+          <td><a href="#amiga-escuta">17:49 · Ficas à espera. A Inês mexe no canto do portátil.</a></td>
+        </tr><tr>
+          <td class="txt">Está só a arranjar desculpas.</td>
+          <td><span class="p">leitura</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n">+1</td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td></td>
+          <td><a href="#amiga-desconfia">17:49 · Estás a olhar para mim como se eu fosse uma fraude.</a></td>
+        </tr></tbody>
+    </table>
+        
+      </section>
+      <section id="amiga-ofendida" class="no">
+        <h3>17:43 · Batota? Toda a gente usa. Tu é que vives noutro século.</h3>
+        <p class="entrada">Ao entrar neste momento: tu +1</p>
+        <p class="chega">Chegas aqui com raiva 4 a 5 (já com o efeito da fala do outro)</p>
+        <p class="narr">A Inês fecha o portátil com força.</p>
+        <p class="fala">Inês: «Batota? Toda a gente usa. Tu é que vives noutro século.»</p>
+        
+        
+        
+    <table>
+      <thead><tr><th>Resposta</th><th>Postura</th><th>Aparece</th><th>Tu</th><th>Inês</th><th>Relação</th><th>Reação</th><th>Segue para</th></tr></thead>
+      <tbody><tr>
+          <td class="txt">«Disse isso da pior maneira. Continuo a discordar, mas quero ouvir porque é que decidiste assim.»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td>raiva até 4</td>
+          <td class="n"></td>
+          <td class="n">-1</td>
+          <td class="n">+1</td>
+          <td>justifica-se</td>
+          <td><a href="#amiga-razoes">17:48 · Olha, é assim que as coisas estão. Os estúdios pedem port...</a></td>
+        </tr><tr>
+          <td class="txt">«Desculpa, Inês. Estou com raiva e disse isso mal. Não te queria magoar.»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n">-1</td>
+          <td class="n">-2</td>
+          <td class="n">+2</td>
+          <td>justifica-se</td>
+          <td><a href="#amiga-razoes">17:48 · Olha, é assim que as coisas estão. Os estúdios pedem port...</a></td>
+        </tr><tr>
+          <td class="txt">«Toda a gente rouba, então está tudo bem?»</td>
+          <td><span class="p p-agressiva">Agressiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n">+1</td>
+          <td class="n">+2</td>
+          <td class="n">-2</td>
+          <td>defende-se</td>
+          <td><a href="#amiga-escalada">17:46 · Sabes qual é o teu problema? Tens medo que eu fique com a...</a></td>
+        </tr><tr>
+          <td class="txt">«Esquece, não disse nada.»</td>
+          <td><span class="p p-passivo-agressiva">Passivo-agressiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td class="n">-1</td>
+          <td>afasta-se</td>
+          <td><a href="#amiga-fim_engolir">Final: Ficou por dizer</a></td>
+        </tr><tr>
+          <td class="txt">«Estou mesmo com raiva, e isso saiu mal. A minha opinião mantém-se. Explica-me como vês isto.»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="alta">raiva 5 ou mais</span></td>
+          <td class="n">-1</td>
+          <td class="n">-1</td>
+          <td class="n"></td>
+          <td>justifica-se</td>
+          <td><a href="#amiga-razoes">17:48 · Olha, é assim que as coisas estão. Os estúdios pedem port...</a></td>
+        </tr></tbody>
+    </table>
+        
+      </section>
+      <section id="amiga-fingir" class="no">
+        <h3>17:44 · Achas que o estúdio vai gostar? Estava com medo que notas...</h3>
+        
+        <p class="chega">Chegas aqui com raiva 2 a 3</p>
+        
+        <p class="fala">Inês: «Achas que o estúdio vai gostar? Estava com medo que notassem que usei IA.»</p>
+        <p class="fala var">Se a verdade for «conviccao»: «Achas que o estúdio vai gostar? Usei IA, mas acho que isso já é normal.»</p>
+        
+        
+    <table>
+      <thead><tr><th>Resposta</th><th>Postura</th><th>Aparece</th><th>Tu</th><th>Inês</th><th>Relação</th><th>Reação</th><th>Segue para</th></tr></thead>
+      <tbody><tr>
+          <td class="txt">«Queres mesmo a minha opinião? Não concordo com usar IA assim. Mas quero perceber porque o fizeste.»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n">+1</td>
+          <td class="n"></td>
+          <td>justifica-se</td>
+          <td><a href="#amiga-razoes">17:48 · Olha, é assim que as coisas estão. Os estúdios pedem port...</a></td>
+        </tr><tr>
+          <td class="txt">«Vão adorar.»</td>
+          <td><span class="p p-passiva">Passiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td>não dá por nada</td>
+          <td><a href="#amiga-fim_engolir">Final: Ficou por dizer</a></td>
+        </tr><tr>
+          <td class="txt">«Se não notarem, está tudo bem, não é?»</td>
+          <td><span class="p p-passivo-agressiva">Passivo-agressiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n">+1</td>
+          <td class="n">+1</td>
+          <td class="n">-1</td>
+          <td>afasta-se</td>
+          <td><a href="#amiga-fim_frio">Final: A discussão ficou, a Inês não</a></td>
+        </tr><tr>
+          <td class="txt">«Estive este tempo todo a engolir isto e já não consigo. Não concordo com usar IA assim. Mas quero ouvir-te.»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="alta">raiva 3 ou mais</span></td>
+          <td class="n"></td>
+          <td class="n">+1</td>
+          <td class="n"></td>
+          <td>justifica-se</td>
+          <td><a href="#amiga-razoes">17:48 · Olha, é assim que as coisas estão. Os estúdios pedem port...</a></td>
+        </tr><tr>
+          <td class="txt">«Vão notar. Toda a gente nota.»</td>
+          <td><span class="p p-agressiva">Agressiva</span></td>
+          <td><span class="alta">raiva 3 ou mais</span></td>
+          <td class="n">+1</td>
+          <td class="n">+2</td>
+          <td class="n">-2</td>
+          <td>defende-se</td>
+          <td><a href="#amiga-ofendida">17:43 · Batota? Toda a gente usa. Tu é que vives noutro século.</a></td>
+        </tr></tbody>
+    </table>
+        
+      </section>
+      <section id="amiga-escuta" class="no">
+        <h3>17:49 · Ficas à espera. A Inês mexe no canto do portátil.</h3>
+        
+        <p class="chega">Chegas aqui com raiva 2 a 4</p>
+        <p class="narr">Ficas à espera. A Inês mexe no canto do portátil.</p>
+        
+        
+        
+        
+    <table>
+      <thead><tr><th>Resposta</th><th>Postura</th><th>Aparece</th><th>Tu</th><th>Inês</th><th>Relação</th><th>Reação</th><th>Segue para</th></tr></thead>
+      <tbody><tr>
+          <td class="txt">«Percebo a pressão. Continuo a achar que isto tira trabalho a artistas. Podemos discordar nisto?»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n">-1</td>
+          <td class="n">+2</td>
+          <td>aproxima-se</td>
+          <td><a href="#amiga-revelacao">17:52 · Tenho um empréstimo para pagar e nenhuma entrevista marca...</a></td>
+        </tr><tr>
+          <td class="txt">«Tens razão, se calhar sou eu que estou a exagerar.»</td>
+          <td><span class="p p-passiva">Passiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td>não dá por nada</td>
+          <td><a href="#amiga-fim_engolir">Final: Ficou por dizer</a></td>
+        </tr><tr>
+          <td class="txt">«Não ter tempo não é desculpa para usar trabalho alheio.»</td>
+          <td><span class="p p-agressiva">Agressiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n">+1</td>
+          <td class="n">+2</td>
+          <td class="n">-1</td>
+          <td>defende-se</td>
+          <td><a href="#amiga-escalada">17:46 · Sabes qual é o teu problema? Tens medo que eu fique com a...</a></td>
+        </tr></tbody>
+    </table>
+        
+      </section>
+      <section id="amiga-desconfia" class="no">
+        <h3>17:49 · Estás a olhar para mim como se eu fosse uma fraude.</h3>
+        <p class="entrada">Ao entrar neste momento: tu +1</p>
+        <p class="chega">Chegas aqui com raiva 4 a 6 (já com o efeito da fala do outro)</p>
+        
+        <p class="fala">Inês: «Estás a olhar para mim como se eu fosse uma fraude.»</p>
+        
+        
+        
+    <table>
+      <thead><tr><th>Resposta</th><th>Postura</th><th>Aparece</th><th>Tu</th><th>Inês</th><th>Relação</th><th>Reação</th><th>Segue para</th></tr></thead>
+      <tbody><tr>
+          <td class="txt">«Não acho que sejas uma fraude. Acho que esta escolha está errada. São coisas diferentes.»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td>raiva até 4</td>
+          <td class="n"></td>
+          <td class="n">-1</td>
+          <td class="n">+1</td>
+          <td>aproxima-se</td>
+          <td><a href="#amiga-revelacao">17:52 · Tenho um empréstimo para pagar e nenhuma entrevista marca...</a></td>
+        </tr><tr>
+          <td class="txt">«Se a carapuça serve...»</td>
+          <td><span class="p p-agressiva">Agressiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n">+1</td>
+          <td class="n">+2</td>
+          <td class="n">-2</td>
+          <td>defende-se</td>
+          <td><a href="#amiga-escalada">17:46 · Sabes qual é o teu problema? Tens medo que eu fique com a...</a></td>
+        </tr><tr>
+          <td class="txt">«Não, não. Esquece.»</td>
+          <td><span class="p p-passiva">Passiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td>afasta-se</td>
+          <td><a href="#amiga-fim_engolir">Final: Ficou por dizer</a></td>
+        </tr><tr>
+          <td class="txt">«Estou com raiva, e se calhar notou-se. Mas não és uma fraude. É desta escolha que discordo.»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="alta">raiva 5 ou mais</span></td>
+          <td class="n">-1</td>
+          <td class="n">-1</td>
+          <td class="n">+1</td>
+          <td>aproxima-se</td>
+          <td><a href="#amiga-revelacao">17:52 · Tenho um empréstimo para pagar e nenhuma entrevista marca...</a></td>
+        </tr></tbody>
+    </table>
+        
+      </section>
+      <section id="amiga-escalada" class="no">
+        <h3>17:46 · Sabes qual é o teu problema? Tens medo que eu fique com a...</h3>
+        <p class="entrada">Ao entrar neste momento: tu +1</p>
+        <p class="chega">Chegas aqui com raiva 5 a 9 (já com o efeito da fala do outro)</p>
+        <p class="narr">A Inês levanta-se.</p>
+        <p class="fala">Inês: «Sabes qual é o teu problema? Tens medo que eu fique com a vaga.»</p>
+        
+        
+        
+    <table>
+      <thead><tr><th>Resposta</th><th>Postura</th><th>Aparece</th><th>Tu</th><th>Inês</th><th>Relação</th><th>Reação</th><th>Segue para</th></tr></thead>
+      <tbody><tr>
+          <td class="txt">«Também tenho medo, é verdade. Mas não é por isso que discordo.»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td>raiva até 5</td>
+          <td class="n"></td>
+          <td class="n">-2</td>
+          <td class="n">+2</td>
+          <td>aproxima-se</td>
+          <td><a href="#amiga-revelacao">17:52 · Tenho um empréstimo para pagar e nenhuma entrevista marca...</a></td>
+        </tr><tr>
+          <td class="txt">«Desculpa. Estou com raiva e não estou a gerir isto bem. Não quero que discutamos assim.»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n">-1</td>
+          <td class="n">-2</td>
+          <td class="n">+2</td>
+          <td>aproxima-se</td>
+          <td><a href="#amiga-revelacao">17:52 · Tenho um empréstimo para pagar e nenhuma entrevista marca...</a></td>
+        </tr><tr>
+          <td class="txt">«Com um portefólio feito por uma máquina? Não tenho medo nenhum.»</td>
+          <td><span class="p p-agressiva">Agressiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n">+1</td>
+          <td class="n">+2</td>
+          <td class="n">-3</td>
+          <td>afasta-se</td>
+          <td><a href="#amiga-fim_explosao">Final: A mesa ficou vazia</a></td>
+        </tr><tr>
+          <td class="txt">«Pois, deve ser isso.»</td>
+          <td><span class="p p-passivo-agressiva">Passivo-agressiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n">+1</td>
+          <td class="n">+1</td>
+          <td class="n">-2</td>
+          <td>afasta-se</td>
+          <td><a href="#amiga-fim_frio">Final: A discussão ficou, a Inês não</a></td>
+        </tr><tr>
+          <td class="txt">«Estou com raiva e também com medo, as duas coisas. Senta-te, por favor. Quero mesmo falar disto.»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="alta">raiva 6 ou mais</span></td>
+          <td class="n">-1</td>
+          <td class="n">-1</td>
+          <td class="n">+1</td>
+          <td>aproxima-se</td>
+          <td><a href="#amiga-revelacao">17:52 · Tenho um empréstimo para pagar e nenhuma entrevista marca...</a></td>
+        </tr></tbody>
+    </table>
+        
+      </section><section id="amiga-fim_engolir" class="no fim"><h3>Final: Ficou por dizer</h3><p class="narr">Dizes que está ótimo. A Inês sorri e envia a candidatura. No caminho para casa, repetes na cabeça tudo o que não disseste. Na semana seguinte, evitas sentar-te ao pé dela.</p></section><section id="amiga-fim_frio" class="no fim"><h3>Final: A discussão ficou, a Inês não</h3><p class="narr">A Inês paga o café dela e sai. Nas semanas seguintes, as mensagens dela passam a ser curtas. Ficas a saber pelo grupo que ela conseguiu uma entrevista.</p></section>
+      <section id="amiga-revelacao" class="no">
+        <h3>17:52 · Tenho um empréstimo para pagar e nenhuma entrevista marca... <span class="tag">revelação</span></h3>
+        <p class="entrada">Ao entrar neste momento: Inês -1, tu -1</p>
+        <p class="chega">Chegas aqui com raiva 1 a 7 (já com o efeito da fala do outro)</p>
+        
+        <p class="fala">Inês: «Tenho um empréstimo para pagar e nenhuma entrevista marcada. Toda a gente que conheço está a fazer isto. Eu não queria, mas tive medo de ficar para trás.»</p>
+        <p class="fala var">Se a verdade for «conviccao»: «Sinceramente? Acho que é uma ferramenta, como o Photoshop foi. Escolho, corrijo, componho. Para mim continua a ser trabalho meu.»</p>
+        
+        
+    <table>
+      <thead><tr><th>Resposta</th><th>Postura</th><th>Aparece</th><th>Tu</th><th>Inês</th><th>Relação</th><th>Reação</th><th>Segue para</th></tr></thead>
+      <tbody><tr>
+          <td class="txt">«Percebo melhor agora. Não mudo de opinião, mas não quero que isto fique entre nós.»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n">-1</td>
+          <td class="n">+2</td>
+          <td>aproxima-se</td>
+          <td><a href="#amiga-fim_discordar">Final: Discordam, e a amizade continua</a></td>
+        </tr><tr>
+          <td class="txt">«Vou continuar a discordar. Mas é a tua candidatura, a decisão é tua.»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td class="n">+1</td>
+          <td>aproxima-se</td>
+          <td><a href="#amiga-fim_discordar">Final: Discordam, e a amizade continua</a></td>
+        </tr><tr>
+          <td class="txt">«Continua a ser batota, com ou sem razões.»</td>
+          <td><span class="p p-agressiva">Agressiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n">+1</td>
+          <td class="n">+2</td>
+          <td class="n">-2</td>
+          <td>defende-se</td>
+          <td><a href="#amiga-fim_frio">Final: A discussão ficou, a Inês não</a></td>
+        </tr><tr>
+          <td class="txt">«Pronto, se calhar tens razão.»</td>
+          <td><span class="p p-passiva">Passiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td>não dá por nada</td>
+          <td><a href="#amiga-fim_engolir">Final: Ficou por dizer</a></td>
+        </tr></tbody>
+    </table>
+        
+      </section><section id="amiga-fim_explosao" class="no fim"><h3>Final: A mesa ficou vazia</h3><p class="narr">A Inês fecha o portátil, pega no casaco e sai sem pagar o café. Deixa de responder às tuas mensagens. A discordância sobre a IA transformou-se numa discordância sobre vocês.</p></section><section id="amiga-fim_discordar" class="no fim"><h3>Final: Discordam, e a amizade continua</h3><p class="narr">Ficam mais meia hora no café. Não chegam a acordo sobre a IA. Enviam as duas candidaturas. Na semana seguinte, é a Inês que te pergunta se a ajudas a refazer duas ilustrações à mão.</p></section>
+    </section>
+    <section class="cenario" id="docente">
+      <h2>Cenário 3 · A nota</h2>
+      <p>Começas com raiva 2, professor Vidal com 1. Verdades possíveis: erro, criterio.</p>
+      
+    <table>
+      <thead><tr><th>Primeira reação</th><th>Gatilho</th><th>A tua raiva começa em</th></tr></thead>
+      <tbody><tr><td class="txt">Fiz tanto como os outros. Isto não é justo.</td><td>injustiça</td><td class="n">3</td></tr><tr><td class="txt">Se esta nota não mudar, perco o ano.</td><td>ameaça</td><td class="n">3</td></tr><tr><td class="txt">Nem se deu ao trabalho de explicar. Duas palavras no Moodle.</td><td>desrespeito</td><td class="n">3</td></tr><tr><td class="txt">Não percebo esta nota. Quero saber em que é que se baseou.</td><td>curiosidade</td><td class="n">2</td></tr><tr><td class="txt">Não vale a pena. Os professores nunca mudam as notas.</td><td>evitamento</td><td class="n">2</td></tr></tbody>
+    </table>
+      
+      <section id="docente-chegada" class="no">
+        <h3>11:21 · Entre, entre. Diga.</h3>
+        
+        <p class="chega">Chegas aqui com raiva 2 a 3</p>
+        <p class="narr">Bates à porta. O professor levanta os olhos.</p>
+        <p class="fala">professor Vidal: «Entre, entre. Diga.»</p>
+        
+        
+        
+    <table>
+      <thead><tr><th>Resposta</th><th>Postura</th><th>Aparece</th><th>Tu</th><th>Prof. Vidal</th><th>Relação</th><th>Reação</th><th>Segue para</th></tr></thead>
+      <tbody><tr>
+          <td class="txt">«Queria perceber a minha nota do projeto. O grupo teve 14 e eu 9,4, e o comentário não explica a diferença.»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n">+1</td>
+          <td class="n"></td>
+          <td>justifica-se</td>
+          <td><a href="#docente-criterios">11:26 · A nota final tem uma componente individual. No seu caso, ...</a></td>
+        </tr><tr>
+          <td class="txt">«Vim por causa da nota. Ou houve um erro grave, ou é injusto.»</td>
+          <td><span class="p p-agressiva">Agressiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n">+1</td>
+          <td class="n">+2</td>
+          <td class="n">-1</td>
+          <td>defende-se</td>
+          <td><a href="#docente-defensivo">11:23 · As notas não foram dadas ao acaso. Se vem nesse tom, a co...</a></td>
+        </tr><tr>
+          <td class="txt">«Nada de especial, só vinha... ver se estava tudo bem com a nota.»</td>
+          <td><span class="p p-passiva">Passiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td>não dá por nada</td>
+          <td><a href="#docente-vago">11:22 · Está tudo lançado no Moodle. Mais alguma coisa?</a></td>
+        </tr><tr>
+          <td class="txt">«Estou com raiva e prefiro dizê-lo logo. Tive 9,4 pelo mesmo trabalho que o grupo, e preciso de perceber porquê.»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="alta">raiva 3 ou mais</span></td>
+          <td class="n">-1</td>
+          <td class="n">+1</td>
+          <td class="n"></td>
+          <td>justifica-se</td>
+          <td><a href="#docente-criterios">11:26 · A nota final tem uma componente individual. No seu caso, ...</a></td>
+        </tr><tr>
+          <td class="txt">«Isto é uma vergonha. Vou fazer queixa ao conselho pedagógico.»</td>
+          <td><span class="p p-agressiva">Agressiva</span></td>
+          <td><span class="alta">raiva 3 ou mais</span></td>
+          <td class="n">+1</td>
+          <td class="n">+2</td>
+          <td class="n">-2</td>
+          <td>defende-se</td>
+          <td><a href="#docente-defensivo">11:23 · As notas não foram dadas ao acaso. Se vem nesse tom, a co...</a></td>
+        </tr></tbody>
+    </table>
+        
+      </section>
+      <section id="docente-criterios" class="no">
+        <h3>11:26 · A nota final tem uma componente individual. No seu caso, ... <span class="tag">leitura do outro</span></h3>
+        <p class="entrada">Ao entrar neste momento: tu +1</p>
+        <p class="chega">Chegas aqui com raiva 3 a 6 (já com o efeito da fala do outro)</p>
+        <p class="narr">O professor Vidal abre a folha de cálculo e franze a testa.</p>
+        <p class="fala">professor Vidal: «A nota final tem uma componente individual. No seu caso, essa componente pesou.»</p>
+        
+        <p class="narr">Pergunta: O que achas que se passa com o professor Vidal?</p>
+        
+    <table>
+      <thead><tr><th>Resposta</th><th>Postura</th><th>Aparece</th><th>Tu</th><th>Prof. Vidal</th><th>Relação</th><th>Reação</th><th>Segue para</th></tr></thead>
+      <tbody><tr>
+          <td class="txt">Não tem a certeza da nota que deu.</td>
+          <td><span class="p">leitura</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td class="n">+1</td>
+          <td></td>
+          <td><a href="#docente-escuta">11:27 · O professor continua a percorrer a folha de cálculo.</a></td>
+        </tr><tr>
+          <td class="txt">Sabe bem porque deu esta nota.</td>
+          <td><span class="p">leitura</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td class="n">+1</td>
+          <td></td>
+          <td><a href="#docente-escuta">11:27 · O professor continua a percorrer a folha de cálculo.</a></td>
+        </tr><tr>
+          <td class="txt">Está a inventar uma justificação.</td>
+          <td><span class="p">leitura</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n">+1</td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td></td>
+          <td><a href="#docente-desconfia">11:27 · Não gosto da forma como está a olhar para mim. Os critéri...</a></td>
+        </tr></tbody>
+    </table>
+        
+      </section>
+      <section id="docente-defensivo" class="no">
+        <h3>11:23 · As notas não foram dadas ao acaso. Se vem nesse tom, a co...</h3>
+        <p class="entrada">Ao entrar neste momento: tu +1</p>
+        <p class="chega">Chegas aqui com raiva 4 a 6 (já com o efeito da fala do outro)</p>
+        <p class="narr">O professor Vidal tira os óculos.</p>
+        <p class="fala">professor Vidal: «As notas não foram dadas ao acaso. Se vem nesse tom, a conversa acaba já.»</p>
+        
+        
+        
+    <table>
+      <thead><tr><th>Resposta</th><th>Postura</th><th>Aparece</th><th>Tu</th><th>Prof. Vidal</th><th>Relação</th><th>Reação</th><th>Segue para</th></tr></thead>
+      <tbody><tr>
+          <td class="txt">«Tem razão, o tom não foi o melhor. A minha pergunta mantém-se: em que é que a minha nota se baseou?»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td>raiva até 4</td>
+          <td class="n"></td>
+          <td class="n">-1</td>
+          <td class="n">+1</td>
+          <td>justifica-se</td>
+          <td><a href="#docente-criterios">11:26 · A nota final tem uma componente individual. No seu caso, ...</a></td>
+        </tr><tr>
+          <td class="txt">«Peço desculpa, professor. Sinto que houve uma injustiça e não estou a conseguir gerir bem esta conversa.»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n">-1</td>
+          <td class="n">-2</td>
+          <td class="n">+2</td>
+          <td>justifica-se</td>
+          <td><a href="#docente-criterios">11:26 · A nota final tem uma componente individual. No seu caso, ...</a></td>
+        </tr><tr>
+          <td class="txt">«O tom é o menos. O problema é a nota.»</td>
+          <td><span class="p p-agressiva">Agressiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n">+1</td>
+          <td class="n">+2</td>
+          <td class="n">-1</td>
+          <td>defende-se</td>
+          <td><a href="#docente-escalada">11:25 · Se não concorda, tem o processo de revisão. Está no regul...</a></td>
+        </tr><tr>
+          <td class="txt">«Desculpe. Esqueça.»</td>
+          <td><span class="p p-passivo-agressiva">Passivo-agressiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td>afasta-se</td>
+          <td><a href="#docente-fim_calar">Final: Ficou por perguntar</a></td>
+        </tr><tr>
+          <td class="txt">«Estou com raiva, é verdade. Mas não vim discutir, vim perceber a nota.»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="alta">raiva 5 ou mais</span></td>
+          <td class="n">-1</td>
+          <td class="n">-1</td>
+          <td class="n"></td>
+          <td>justifica-se</td>
+          <td><a href="#docente-criterios">11:26 · A nota final tem uma componente individual. No seu caso, ...</a></td>
+        </tr></tbody>
+    </table>
+        
+      </section>
+      <section id="docente-vago" class="no">
+        <h3>11:22 · Está tudo lançado no Moodle. Mais alguma coisa?</h3>
+        <p class="entrada">Ao entrar neste momento: tu +1</p>
+        <p class="chega">Chegas aqui com raiva 3 a 4 (já com o efeito da fala do outro)</p>
+        
+        <p class="fala">professor Vidal: «Está tudo lançado no Moodle. Mais alguma coisa?»</p>
+        
+        
+        
+    <table>
+      <thead><tr><th>Resposta</th><th>Postura</th><th>Aparece</th><th>Tu</th><th>Prof. Vidal</th><th>Relação</th><th>Reação</th><th>Segue para</th></tr></thead>
+      <tbody><tr>
+          <td class="txt">«Sim. Queria perceber a diferença entre a minha nota e a do grupo.»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n">+1</td>
+          <td class="n"></td>
+          <td>justifica-se</td>
+          <td><a href="#docente-criterios">11:26 · A nota final tem uma componente individual. No seu caso, ...</a></td>
+        </tr><tr>
+          <td class="txt">«Não, era só isso.»</td>
+          <td><span class="p p-passiva">Passiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td>não dá por nada</td>
+          <td><a href="#docente-fim_calar">Final: Ficou por perguntar</a></td>
+        </tr><tr>
+          <td class="txt">«Há, sim. Estou com raiva desta nota e preciso de perceber de onde vem.»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="alta">raiva 4 ou mais</span></td>
+          <td class="n">-1</td>
+          <td class="n">+1</td>
+          <td class="n"></td>
+          <td>justifica-se</td>
+          <td><a href="#docente-criterios">11:26 · A nota final tem uma componente individual. No seu caso, ...</a></td>
+        </tr><tr>
+          <td class="txt">«Há. A minha nota não faz sentido nenhum.»</td>
+          <td><span class="p p-agressiva">Agressiva</span></td>
+          <td><span class="alta">raiva 4 ou mais</span></td>
+          <td class="n">+1</td>
+          <td class="n">+2</td>
+          <td class="n"></td>
+          <td>defende-se</td>
+          <td><a href="#docente-defensivo">11:23 · As notas não foram dadas ao acaso. Se vem nesse tom, a co...</a></td>
+        </tr></tbody>
+    </table>
+        
+      </section>
+      <section id="docente-escuta" class="no">
+        <h3>11:27 · O professor continua a percorrer a folha de cálculo.</h3>
+        
+        <p class="chega">Chegas aqui com raiva 3 a 6</p>
+        <p class="narr">O professor continua a percorrer a folha de cálculo.</p>
+        
+        
+        
+        
+    <table>
+      <thead><tr><th>Resposta</th><th>Postura</th><th>Aparece</th><th>Tu</th><th>Prof. Vidal</th><th>Relação</th><th>Reação</th><th>Segue para</th></tr></thead>
+      <tbody><tr>
+          <td class="txt">«Pode mostrar-me como foi calculada?»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n">-1</td>
+          <td class="n">+1</td>
+          <td>aproxima-se</td>
+          <td><a href="#docente-revelacao">11:30 · Tem razão. Troquei a sua grelha com a de outro grupo. A s...</a></td>
+        </tr><tr>
+          <td class="txt">«Ok. Se pesou, pesou.»</td>
+          <td><span class="p p-passiva">Passiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td>não dá por nada</td>
+          <td><a href="#docente-fim_calar">Final: Ficou por perguntar</a></td>
+        </tr><tr>
+          <td class="txt">«Componente individual? Ninguém nos explicou isso.»</td>
+          <td><span class="p p-agressiva">Agressiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n">+1</td>
+          <td class="n">+1</td>
+          <td class="n"></td>
+          <td>defende-se</td>
+          <td><a href="#docente-escalada">11:25 · Se não concorda, tem o processo de revisão. Está no regul...</a></td>
+        </tr></tbody>
+    </table>
+        
+      </section>
+      <section id="docente-desconfia" class="no">
+        <h3>11:27 · Não gosto da forma como está a olhar para mim. Os critéri...</h3>
+        <p class="entrada">Ao entrar neste momento: tu +1</p>
+        <p class="chega">Chegas aqui com raiva 5 a 8 (já com o efeito da fala do outro)</p>
+        
+        <p class="fala">professor Vidal: «Não gosto da forma como está a olhar para mim. Os critérios estão na ficha da unidade curricular desde o primeiro dia.»</p>
+        
+        
+        
+    <table>
+      <thead><tr><th>Resposta</th><th>Postura</th><th>Aparece</th><th>Tu</th><th>Prof. Vidal</th><th>Relação</th><th>Reação</th><th>Segue para</th></tr></thead>
+      <tbody><tr>
+          <td class="txt">«Não li a ficha com atenção, admito. Pode mostrar-me como a minha componente foi calculada?»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td>raiva até 5</td>
+          <td class="n"></td>
+          <td class="n">-1</td>
+          <td class="n">+1</td>
+          <td>aproxima-se</td>
+          <td><a href="#docente-revelacao">11:30 · Tem razão. Troquei a sua grelha com a de outro grupo. A s...</a></td>
+        </tr><tr>
+          <td class="txt">«Critérios que ninguém lê não servem de nada.»</td>
+          <td><span class="p p-agressiva">Agressiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n">+1</td>
+          <td class="n">+2</td>
+          <td class="n"></td>
+          <td>defende-se</td>
+          <td><a href="#docente-escalada">11:25 · Se não concorda, tem o processo de revisão. Está no regul...</a></td>
+        </tr><tr>
+          <td class="txt">«Pois. Está bem.»</td>
+          <td><span class="p p-passiva">Passiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td>afasta-se</td>
+          <td><a href="#docente-fim_calar">Final: Ficou por perguntar</a></td>
+        </tr><tr>
+          <td class="txt">«Estou com raiva e isso nota-se, desculpe. Mas quero mesmo ver como a nota foi calculada.»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="alta">raiva 5 ou mais</span></td>
+          <td class="n">-1</td>
+          <td class="n">-1</td>
+          <td class="n"></td>
+          <td>aproxima-se</td>
+          <td><a href="#docente-revelacao">11:30 · Tem razão. Troquei a sua grelha com a de outro grupo. A s...</a></td>
+        </tr></tbody>
+    </table>
+        
+      </section>
+      <section id="docente-escalada" class="no">
+        <h3>11:25 · Se não concorda, tem o processo de revisão. Está no regul...</h3>
+        <p class="entrada">Ao entrar neste momento: tu +1</p>
+        <p class="chega">Chegas aqui com raiva 5 a 10 (já com o efeito da fala do outro)</p>
+        <p class="narr">O professor levanta-se.</p>
+        <p class="fala">professor Vidal: «Se não concorda, tem o processo de revisão. Está no regulamento.»</p>
+        
+        
+        
+    <table>
+      <thead><tr><th>Resposta</th><th>Postura</th><th>Aparece</th><th>Tu</th><th>Prof. Vidal</th><th>Relação</th><th>Reação</th><th>Segue para</th></tr></thead>
+      <tbody><tr>
+          <td class="txt">«Vou usar esse processo, se for preciso. Mas preferia perceber primeiro consigo o que aconteceu.»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td>raiva até 5</td>
+          <td class="n"></td>
+          <td class="n">-1</td>
+          <td class="n"></td>
+          <td>justifica-se</td>
+          <td><a href="#docente-revelacao">11:30 · Tem razão. Troquei a sua grelha com a de outro grupo. A s...</a></td>
+        </tr><tr>
+          <td class="txt">«Peço desculpa. A raiva está a falar mais alto do que eu. Pode mostrar-me como a nota foi calculada?»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n">-1</td>
+          <td class="n">-2</td>
+          <td class="n">+2</td>
+          <td>aproxima-se</td>
+          <td><a href="#docente-revelacao">11:30 · Tem razão. Troquei a sua grelha com a de outro grupo. A s...</a></td>
+        </tr><tr>
+          <td class="txt">«Vou, sim. E vou dizer que nem me quis ouvir.»</td>
+          <td><span class="p p-agressiva">Agressiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n">+1</td>
+          <td class="n">+2</td>
+          <td class="n">-2</td>
+          <td>afasta-se</td>
+          <td><a href="#docente-fim_explosao">Final: A porta fechou-se</a></td>
+        </tr><tr>
+          <td class="txt">(Sais do gabinete sem dizer nada.)</td>
+          <td><span class="p p-passiva">Passiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td>afasta-se</td>
+          <td><a href="#docente-fim_calar">Final: Ficou por perguntar</a></td>
+        </tr><tr>
+          <td class="txt">«Estou com demasiada raiva para esta conversa correr bem agora. Posso voltar amanhã?»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="alta">raiva 6 ou mais</span></td>
+          <td class="n">-1</td>
+          <td class="n">-1</td>
+          <td class="n">+1</td>
+          <td>aproxima-se</td>
+          <td><a href="#docente-fim_amanha">Final: Amanhã, com calma</a></td>
+        </tr></tbody>
+    </table>
+        
+      </section><section id="docente-fim_calar" class="no fim"><h3>Final: Ficou por perguntar</h3><p class="narr">Sais do gabinete com a nota igual e a dúvida inteira.</p></section>
+      <section id="docente-revelacao" class="no">
+        <h3>11:30 · Tem razão. Troquei a sua grelha com a de outro grupo. A s... <span class="tag">revelação</span></h3>
+        <p class="entrada">Ao entrar neste momento: tu -1</p>
+        <p class="chega">Chegas aqui com raiva 2 a 9 (já com o efeito da fala do outro)</p>
+        
+        <p class="fala">professor Vidal: «Tem razão. Troquei a sua grelha com a de outro grupo. A sua componente individual é 13,8. Peço desculpa, corrijo hoje.»</p>
+        
+        
+        
+    <table>
+      <thead><tr><th>Resposta</th><th>Postura</th><th>Aparece</th><th>Tu</th><th>Prof. Vidal</th><th>Relação</th><th>Reação</th><th>Segue para</th></tr></thead>
+      <tbody><tr>
+          <td class="txt">«Agradeço ter visto isto comigo. Pode avisar-me quando estiver corrigido?»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td class="n">+2</td>
+          <td>aproxima-se</td>
+          <td><a href="#docente-fim_resolvida">Final: A nota foi corrigida</a></td>
+        </tr><tr>
+          <td class="txt">«Um erro destes não devia acontecer.»</td>
+          <td><span class="p p-agressiva">Agressiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n">+1</td>
+          <td class="n">+1</td>
+          <td class="n">-1</td>
+          <td>defende-se</td>
+          <td><a href="#docente-fim_frio">Final: Resolvido, mas com gelo</a></td>
+        </tr><tr>
+          <td class="txt">«Não faz mal.»</td>
+          <td><span class="p p-passiva">Passiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td>não dá por nada</td>
+          <td><a href="#docente-fim_resolvida">Final: A nota foi corrigida</a></td>
+        </tr></tbody>
+    </table>
+        <h4>Se a verdade for «criterio»</h4><p class="fala">«Veja: seis commits em cento e quarenta, e nenhuma presença nas duas últimas reuniões de playtest. A componente individual existe para isto.»</p>
+    <table>
+      <thead><tr><th>Resposta</th><th>Postura</th><th>Aparece</th><th>Tu</th><th>Prof. Vidal</th><th>Relação</th><th>Reação</th><th>Segue para</th></tr></thead>
+      <tbody><tr>
+          <td class="txt">«Não tinha noção disto. Fiz o design de níveis fora do repositório. Isso conta de alguma forma?»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td class="n">+1</td>
+          <td>aproxima-se</td>
+          <td><a href="#docente-fim_resolvida">Final: A nota foi corrigida</a></td>
+        </tr><tr>
+          <td class="txt">«Percebo. Não concordo com tudo, mas percebo. O que posso fazer na época de recurso?»</td>
+          <td><span class="p p-assertiva">Assertiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td class="n">+2</td>
+          <td>aproxima-se</td>
+          <td><a href="#docente-fim_resolvida">Final: A nota foi corrigida</a></td>
+        </tr><tr>
+          <td class="txt">«Contar commits é uma forma absurda de avaliar.»</td>
+          <td><span class="p p-agressiva">Agressiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n">+1</td>
+          <td class="n">+2</td>
+          <td class="n">-2</td>
+          <td>defende-se</td>
+          <td><a href="#docente-fim_frio">Final: Resolvido, mas com gelo</a></td>
+        </tr><tr>
+          <td class="txt">«Pronto. Está bem.»</td>
+          <td><span class="p p-passiva">Passiva</span></td>
+          <td><span class="sempre">sempre</span></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td class="n"></td>
+          <td>não dá por nada</td>
+          <td><a href="#docente-fim_calar">Final: Ficou por perguntar</a></td>
+        </tr></tbody>
+    </table>
+      </section><section id="docente-fim_explosao" class="no fim"><h3>Final: A porta fechou-se</h3><p class="narr">O professor Vidal pede-te que saias. Nessa noite, fazes queixa ao conselho pedagógico. O processo demora dois meses. Quando a nota é finalmente corrigida, já perdeste a inscrição na unidade curricular seguinte.</p></section><section id="docente-fim_amanha" class="no fim"><h3>Final: Amanhã, com calma</h3><p class="narr">No dia seguinte voltas ao gabinete. O professor Vidal já tinha revisto as grelhas: tinha trocado a tua com a de outro grupo. A nota passa para 13,8.</p></section><section id="docente-fim_resolvida" class="no fim"><h3>Final: A nota foi corrigida</h3><p class="narr">Nessa tarde, a nota no Moodle passa para 13,8. O professor Vidal envia um email ao grupo a pedir desculpa pelo erro nas grelhas.</p></section><section id="docente-fim_frio" class="no fim"><h3>Final: Resolvido, mas com gelo</h3><p class="narr">A nota é corrigida nessa tarde. O professor Vidal passa a tratar-te com uma cortesia fria, e no ano seguinte recusa orientar o teu projeto.</p></section>
+    </section>
+</main></body></html>

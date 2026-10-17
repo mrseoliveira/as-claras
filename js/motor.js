@@ -37,6 +37,7 @@
       marcas: {},
       eco: null,              // efeito da última resposta
       previsoes: [],          // { outroPrev, outroReal, euPrev, euReal }
+      conversa: [],           // a conversa turno a turno, para rever no fim
       assertivaQuente: null,  // primeira resposta assertiva com raiva que esteve disponível
       efeitoFala: null,       // efeito da fala do outro ao entrar no nó
       avisos: []
@@ -124,6 +125,10 @@
       e.historico.push({ no: e.no, tipo: op.tipo, postura: op.postura, texto: op.texto, eu: e.eu, outro: e.outro });
     }
     const antes = { eu: e.eu, outro: e.outro };
+    // Respostas que a raiva escondia neste momento, para mostrar ao rever a conversa.
+    const tapadas = (n.opcoes || [])
+      .filter((o) => o.requer && o.requer.euMax != null && e.eu > o.requer.euMax)
+      .map((o) => o.texto);
     aplicar(e, op.efeitos);
     e.eco = {
       texto: op.texto,
@@ -145,6 +150,18 @@
         e.eco.previsao = previsao;
         e.previsoes.push({ outroPrev: previsao.outro, outroReal: op.reage, euPrev: null, euReal: e.eco.euReal });
       }
+      e.conversa.push({
+        texto: op.texto,
+        postura: op.postura || null,
+        ouviu: op.ouviu || null,
+        outroPrev: previsao ? previsao.outro : null,
+        outroReal: op.reage || null,
+        resposta: atual(e).fala || null,
+        euAntes: antes.eu,
+        euDepois: e.eu,
+        euPrev: null,
+        tapadas
+      });
     }
     return true;
   }
@@ -153,6 +170,8 @@
   function preverEu(e, valor) {
     const ult = e.previsoes[e.previsoes.length - 1];
     if (ult) ult.euPrev = valor;
+    const fala = e.conversa[e.conversa.length - 1];
+    if (fala) fala.euPrev = valor;
     if (e.eco) e.eco.previsaoEu = valor;
   }
 
@@ -174,6 +193,7 @@
     e.pausouAqui = true;
     e.eu = limitar(e.eu - (rotulo ? 2 : 1));
     e.historico.push({ no: e.no, tipo: 'pausa', rotulo: rotulo || null, eu: e.eu, outro: e.outro });
+    e.conversa.push({ pausa: true, rotulo: rotulo || null });
     // Pausas a mais leem-se como fuga.
     if (e.pausas > 2) {
       e.outro = limitar(e.outro + 1);
@@ -186,6 +206,8 @@
     e.eu = limitar(e.eu - 1);
     const ult = e.historico[e.historico.length - 1];
     if (ult && ult.tipo === 'pausa') ult.distanciou = true;
+    const p = e.conversa[e.conversa.length - 1];
+    if (p && p.pausa) p.distanciou = true;
   }
 
   function resumo(e) {
@@ -224,6 +246,7 @@
       raivaMax: e.raivaMax,
       escondidas: e.escondidas.size,
       textosEscondidos: [...e.escondidas.values()],
+      conversa: e.conversa,
       leitura: e.leitura,
       primeiraReacao: e.primeiraReacao,
       verdade: e.verdade,

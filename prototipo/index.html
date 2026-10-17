@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Às Claras</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilo.css?v=20261017d">
+</head>
+<body>
+  <main class="jogo">
+    <div class="lado-cena">
+      <div id="hud" class="hud"></div>
+      <div id="palco" class="palco"></div>
+    </div>
+    <div class="lado-conversa">
+      <div id="conversa" class="conversa" aria-live="polite" hidden></div>
+      <div id="painel" class="painel"></div>
+    </div>
+  </main>
+
+  <!-- Scripts clássicos (sem módulos) para o jogo abrir com duplo clique, sem servidor. -->
+  <script src="dados/introducao.js?v=20261017d"></script>
+  <script src="dados/cenario-01.js?v=20261017d"></script>
+  <script src="dados/cenario-02.js?v=20261017d"></script>
+  <script src="dados/cenario-03.js?v=20261017d"></script>
+  <script src="js/motor.js?v=20261017d"></script>
+  <script src="js/cena.js?v=20261017d"></script>
+  <script src="js/registo.js?v=20261017d"></script>
+  <script src="js/ui.js?v=20261017d"></script>
+</body>
+</html>
