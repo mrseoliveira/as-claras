@@ -2,8 +2,8 @@
 // Sem URL e chave preenchidos, ou sem consentimento, não envia nada.
 // Não guarda nomes, IPs nem o user agent completo, só uma sessão aleatória e o código que a pessoa escolher.
 (function (global) {
-  const SUPABASE_URL = '';   // ex.: https://xxxx.supabase.co
-  const SUPABASE_KEY = '';   // chave pública (anon / publishable), só permite inserir
+  const SUPABASE_URL = 'https://yfmuhrnjsdzhrorwzwqu.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_xA2DRQtEYd1pnnKfmKvDSw_6nkZkvwv';   // chave pública, só permite inserir
   const VERSAO = 'prototipo-conversa-2026-10-17';
   const RESERVA = 'asclaras-registo-pendente';
 
@@ -38,16 +38,18 @@
     try { localStorage.setItem(RESERVA, JSON.stringify(fila.slice(-500))); } catch (_) { /* sem armazenamento, perde-se */ }
   }
 
+  // As chaves novas (sb_publishable_...) não são JWT e vão só no apikey. As antigas (anon, eyJ...) vão nos dois.
+  function cabecalhos() {
+    const h = { apikey: SUPABASE_KEY, 'Content-Type': 'application/json', Prefer: 'return=minimal' };
+    if (SUPABASE_KEY.startsWith('eyJ')) h.Authorization = `Bearer ${SUPABASE_KEY}`;
+    return h;
+  }
+
   function pedido(linhas, keepalive) {
     return fetch(`${SUPABASE_URL}/rest/v1/eventos`, {
       method: 'POST',
       keepalive: !!keepalive,
-      headers: {
-        apikey: SUPABASE_KEY,
-        Authorization: `Bearer ${SUPABASE_KEY}`,
-        'Content-Type': 'application/json',
-        Prefer: 'return=minimal'
-      },
+      headers: cabecalhos(),
       body: JSON.stringify(linhas)
     });
   }

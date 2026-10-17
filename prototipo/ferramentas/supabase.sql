@@ -28,6 +28,9 @@ create policy "inserir anonimo" on public.eventos
   for insert to anon
   with check (true);
 
+-- Nos projetos novos as tabelas podem não vir com permissões para anon.
+grant insert on public.eventos to anon;
+
 -- Sem políticas de select, update ou delete: com a chave pública ninguém lê nem apaga.
 revoke select, update, delete on public.eventos from anon, authenticated;
 
