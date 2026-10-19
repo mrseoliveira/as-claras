@@ -78,9 +78,11 @@
     try { localStorage.setItem(CHAVE, JSON.stringify(resultados)); } catch (_) { /* sem armazenamento, fica só em memória */ }
   }
 
-  function medidor(quem, nome, valor) {
+  // Os medidores mostram a abertura para conversar, o contrário da raiva do motor (10 menos a raiva).
+  function medidor(quem, nome, raiva) {
+    const valor = Motor.MAX - raiva;
     const pct = (valor / Motor.MAX) * 100;
-    const cor = valor < Motor.TENSA ? 'var(--turquesa)' : valor < Motor.ALTA ? 'var(--amarelo)' : 'var(--coral)';
+    const cor = raiva < Motor.TENSA ? 'var(--turquesa)' : raiva < Motor.ALTA ? 'var(--amarelo)' : 'var(--coral)';
     return `
       <div class="medidor medidor-${quem}">
         <span class="medidor-nome">${esc(nome)}</span>
@@ -99,9 +101,9 @@
   function desenharHud() {
     const no = Motor.atual(estado);
     hud.innerHTML = `
-      ${medidor('eu', 'A tua raiva', euVisivel())}
+      ${medidor('eu', 'A tua abertura para conversar', euVisivel())}
       <span class="hora">${esc(no.hora || '')}</span>
-      ${no.ausente ? '<div></div>' : medidor('outro', `Raiva ${ref('do').replace(estado.cen.outro, nomeCurto())}`, estado.outro)}`;
+      ${no.ausente ? '<div></div>' : medidor('outro', `Abertura ${ref('do').replace(estado.cen.outro, nomeCurto())} para conversar`, estado.outro)}`;
   }
 
   // ---------- A conversa, que cresce para baixo ----------
@@ -186,9 +188,9 @@
   function botaoOpcao(op) {
     if (op.estado === 'escondida') {
       return `
-        <button class="opcao escondida" disabled aria-label="Resposta indisponível com esta raiva">
+        <button class="opcao escondida" disabled aria-label="Resposta indisponível com tão pouca abertura">
           <span class="opcao-texto" aria-hidden="true">${esc(op.texto)}</span>
-          <span class="opcao-nota">Com esta raiva, esta resposta não te ocorre.</span>
+          <span class="opcao-nota">Com tão pouca abertura para conversar, esta resposta não te ocorre.</span>
         </button>`;
     }
     const quente = op.requer && op.requer.euMin != null ? ' quente' : '';
@@ -219,8 +221,8 @@
   // O que acontece na pausa fica na zona de baixo: a conversa termina sempre na última fala do outro.
   function desenharPausa2() {
     const nomeou = rotuloPausa
-      ? `Deste um nome ao que sentes: ${esc(rotuloPausa.toLowerCase())}. A raiva desceu um pouco.`
-      : 'A raiva desceu ligeiramente.';
+      ? `Deste um nome ao que sentes: ${esc(rotuloPausa.toLowerCase())}. A tua abertura para conversar subiu um pouco.`
+      : 'A tua abertura para conversar subiu ligeiramente.';
     painel.innerHTML = `
       <p class="narracao">${nomeou}</p>
       ${estado.avisos.map((a) => `<p class="aviso">${esc(a)}</p>`).join('')}
@@ -317,7 +319,7 @@
       ${rever(r.conversa)}
       ${r.textosEscondidos.length ? `
       <div class="escondidas-fim">
-        <h4>Com menos raiva, estas respostas estavam ao teu alcance</h4>
+        <h4>Com mais abertura para conversar, estas respostas estavam ao teu alcance</h4>
         ${lista(r.textosEscondidos.slice(0, 3).map(semAspas))}
       </div>` : ''}
       <div class="espelho">
@@ -436,7 +438,7 @@
     palco.innerHTML = `<div class="titulo-jogo"><h1>${esc(NOME_JOGO)}</h1><p>Três conversas difíceis</p></div>`;
     const todos = ORDEM.every((id) => resultados[id]);
     painel.innerHTML = `
-      <p>Em cada conversa há dois medidores de raiva, a tua e a da outra pessoa. Quanto mais sobe a tua, menos respostas ficam ao teu alcance. Em qualquer momento é possível fazer uma pausa.</p>
+      <p>Em cada conversa há dois medidores de abertura para conversar, a tua e a da outra pessoa. Quanto menos abertura tens, menos respostas ficam ao teu alcance. Em qualquer momento é possível fazer uma pausa.</p>
       <div class="cenarios">
         ${ORDEM.map((id) => {
           const c = window.CENARIOS[id];

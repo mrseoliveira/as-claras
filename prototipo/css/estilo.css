@@ -394,7 +394,19 @@ a.pausa { text-decoration: none; display: inline-block; }
 .em-conversa .intro-topo { grid-area: intro; margin: 0; }
 .em-conversa .palco { grid-area: palco; }
 .em-conversa .palco svg { max-height: 40vh; width: auto; max-width: 100%; display: block; margin: 0 auto; }
-.em-conversa .hud { grid-area: hud; }
+.em-conversa .hud {
+  grid-area: hud;
+  grid-template-columns: auto minmax(60px, 1fr) auto auto;
+  gap: 6px 10px;
+}
+/* Um medidor por linha, com nomes, barras e valores alinhados em colunas, e a hora à direita */
+.em-conversa .medidor { display: contents; }
+.em-conversa .medidor-eu > * { grid-row: 1; }
+.em-conversa .medidor-outro > * { grid-row: 2; }
+.em-conversa .medidor-nome { grid-column: 1; justify-self: start; }
+.em-conversa .medidor-barra { grid-column: 2; transform: none; }
+.em-conversa .medidor-valor { grid-column: 3; }
+.em-conversa .hora { grid-column: 4; grid-row: 1 / span 2; align-self: center; order: 0; }
 .em-conversa .painel { grid-area: painel; align-self: start; max-height: 100%; }
 .em-conversa .conversa { grid-area: conversa; }
 .conversa {
@@ -447,7 +459,7 @@ a.pausa { text-decoration: none; display: inline-block; }
 /* Ecrãs estreitos (até tablets e janelas a meio ecrã): a ilustração por cima, a conversa por baixo */
 @media (max-width: 1024px) {
   .jogo.em-conversa {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     grid-template-rows: auto auto auto minmax(0, 1fr) auto;
     grid-template-areas: "intro" "palco" "hud" "conversa" "painel";
     row-gap: 8px;
@@ -456,10 +468,16 @@ a.pausa { text-decoration: none; display: inline-block; }
   .em-conversa .palco svg { max-height: 30vh; box-shadow: none; }
   .em-conversa .hud { max-width: 720px; width: 100%; margin: 0 auto; }
   .em-conversa .painel { max-height: 45dvh; align-self: stretch; }
+  .em-conversa .conversa:empty { display: none; }
   .nuvem-texto { font-size: 31px; line-height: 1.05; }
 }
 
 @media (max-width: 560px) {
+  .em-conversa .hud { grid-template-columns: minmax(0, 1fr) 72px auto; }
+  .em-conversa .medidor-nome { white-space: normal; font-size: 14px; }
+  .em-conversa .hora { grid-column: 1 / -1; grid-row: 1; justify-self: center; }
+  .em-conversa .medidor-eu > * { grid-row: 2; }
+  .em-conversa .medidor-outro > * { grid-row: 3; }
   body { font-size: 16px; }
   .hud { grid-template-columns: 1fr; gap: 10px; }
   .medidor-outro { flex-direction: row; }

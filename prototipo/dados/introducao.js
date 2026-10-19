@@ -13,7 +13,7 @@ window.INTRODUCAO = [
     texto: [
       'A raiva aparece quando algo nos parece injusto, nos ameaça ou nos falta ao respeito. Não é um defeito, e há quem conviva com ela a vida inteira.',
       'O que muda de pessoa para pessoa é aquilo que a dispara e o que se faz a seguir. Perceber o que te enraivece ajuda a reconhecer o momento em que a raiva começa a escolher as palavras por ti.',
-      'Neste jogo, quando a tua raiva sobe, algumas respostas deixam de te ocorrer.'
+      'Neste jogo, quando a tua raiva sobe, a tua abertura para conversar desce e algumas respostas deixam de te ocorrer.'
     ]
   },
   {
