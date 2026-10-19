@@ -113,7 +113,8 @@
     pensamento = null;
     caraEu = null;
     if (no.fim) { modo = faseResposta(); return; }
-    if (no.narracao) registo.push({ quem: 'narra', texto: no.narracao });
+    // A narração de abertura fica na introdução, no topo, e não entra na conversa.
+    if (no.narracao && !(introAberta && estado.no === 'inicio')) registo.push({ quem: 'narra', texto: no.narracao });
     if (no.fala) registo.push({ quem: 'outro', texto: no.fala });
     if (no.fala && perguntarEmocao) { modo = 'sentir'; return; }
     pensar(null);
@@ -467,7 +468,10 @@
     jogo.classList.toggle('em-conversa', emConversa);
     conversa.hidden = !emConversa;
     intro.hidden = !(emConversa && introAberta);
-    if (!intro.hidden) intro.textContent = estado.cen.introducao;
+    if (!intro.hidden) {
+      const abertura = estado.cen.nos.inicio.narracao;
+      intro.innerHTML = `<span>${esc(estado.cen.introducao)}</span>${abertura ? `<span class="intro-narra">${esc(abertura)}</span>` : ''}`;
+    }
     // Enquanto o outro fala e dizes o que sentes, ele fica em destaque. Depois é a tua vez.
     const vez = modo === 'sentir' ? 'outro' : modo === 'fim' ? null : 'eu';
     palco.innerHTML = Cena.desenhar(modo === 'sentir' ? Object.assign({}, estado, { eu: euVisivel() }) : estado, vez, pensamento, caraEu);

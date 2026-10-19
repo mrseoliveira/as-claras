@@ -373,6 +373,8 @@ a.pausa { text-decoration: none; display: inline-block; }
    à direita a conversa com scroll próprio */
 .lado-cena, .lado-conversa { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
 .intro-topo[hidden] { display: none; }
+.intro-topo span { display: block; }
+.intro-narra { margin-top: 4px; font-weight: 400; font-style: italic; color: #5a5270; }
 .jogo.em-conversa {
   max-width: 1320px;
   height: 100vh;
