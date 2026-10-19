@@ -321,7 +321,12 @@ a.pausa { text-decoration: none; display: inline-block; }
 .rever .msg { font-size: 16px; max-width: 88%; }
 .rever .msg p { margin: 0; }
 .rever-percecoes { border-top: 2px dashed #d9d3e4; padding-top: 8px; }
-.rever-percecoes p { margin: 0 0 4px; font-size: 16px; }
+.rever-percecoes { margin: 0; display: grid; gap: 2px; }
+.rever-percecoes dt { font-weight: 700; font-size: 15px; margin-top: 6px; }
+.rever-percecoes dt:first-child { margin-top: 0; }
+.rever-percecoes dd { margin: 0; font-size: 16px; }
+.rever-vazio { color: #77708a; font-style: italic; }
+.rever-verdade { display: block; margin-top: 2px; }
 .rever li.rever-surpresa { border-color: var(--coral); border-left-width: 10px; background: #fff3f5; }
 .rever li p { margin: 0 0 4px; font-size: 16px; }
 .rever-n { font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: .06em; color: var(--roxo); }

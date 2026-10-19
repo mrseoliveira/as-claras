@@ -186,7 +186,7 @@
   // Fica registada, mas não mexe na raiva do motor.
   function sentir(e, emocao) {
     const fala = e.conversa[e.conversa.length - 1];
-    if (fala) fala.emocao = emocao;
+    if (fala) { fala.sentiu = true; fala.emocao = emocao || null; }
     if (e.eco) e.eco.emocao = emocao;
   }
 

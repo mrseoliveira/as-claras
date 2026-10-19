@@ -121,6 +121,9 @@
   function pensar(emocao) {
     pensamento = Motor.pensamento(estado, emocao ? EMOCOES[emocao].faixa : null);
     caraEu = emocao ? EMOCOES[emocao].cara : null;
+    // O pensamento fica no turno a que responde, para a revisão final.
+    const t = estado.conversa[estado.conversa.length - 1];
+    if (t && !t.pausa && t.pensamento === undefined) t.pensamento = pensamento;
   }
 
   function faseResposta() {
@@ -248,14 +251,17 @@
       }
       n += 1;
       const leuMal = !!t.leitura && !t.leitura.certa;
-      const percecoes = [];
-      if (t.emocao && EMOCOES[t.emocao]) {
-        const em = EMOCOES[t.emocao];
-        percecoes.push(`<strong>O que sentiste:</strong> ${em.emoji} ${esc(em.nome.toLowerCase())}.`);
+      // As perguntas que te foram feitas neste turno, cada uma com a tua resposta.
+      const perguntas = [];
+      if (t.sentiu) {
+        const em = t.emocao && EMOCOES[t.emocao];
+        perguntas.push(['O que sentiste?', em ? `${em.emoji} ${esc(em.nome)}` : '<span class="rever-vazio">Não escolheste.</span>']);
       }
+      if (t.pensamento) perguntas.push(['O que pensaste?', `«${esc(semAspas(t.pensamento))}»`]);
       if (t.leitura) {
-        percecoes.push(`<strong>O que achaste que se passava:</strong> ${esc(semAspas(t.leitura.texto).replace(/\.$/, '').toLowerCase())}. Nesta partida, ${esc(estado.cen.descricaoVerdade[estado.verdade])}.`);
+        perguntas.push(['O que achaste que se passava?', `${esc(semAspas(t.leitura.texto))} <span class="rever-verdade">Nesta partida, ${esc(estado.cen.descricaoVerdade[estado.verdade])}.</span>`]);
       }
+      const percecoes = perguntas.map(([q, r]) => `<dt>${q}</dt><dd>${r}</dd>`);
       return `
         <li${leuMal ? ' class="rever-surpresa"' : ''}>
           <div class="rever-topo">
@@ -271,7 +277,7 @@
             <span class="msg-nome">${esc(nomeCurto())}</span>
             <p>${esc(t.resposta)}</p>
           </div>` : ''}
-          ${percecoes.length ? `<div class="rever-percecoes">${percecoes.map((l) => `<p>${l}</p>`).join('')}</div>` : ''}
+          ${percecoes.length ? `<dl class="rever-percecoes">${percecoes.join('')}</dl>` : ''}
         </li>`;
     }).join('');
     return `
@@ -527,6 +533,7 @@
       modo = faseResposta();
     } else if (acao === 'sem-emocao') {
       Registo.evento('sentir', Object.assign(momento(), { emocao: null, ms: ms() }));
+      Motor.sentir(estado, null);
       pensar(null);
       modo = faseResposta();
     } else if (acao === 'pausa') {
