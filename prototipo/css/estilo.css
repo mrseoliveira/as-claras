@@ -369,18 +369,32 @@ a.pausa { text-decoration: none; display: inline-block; }
 .espelho-dados li { margin-bottom: 4px; }
 .espelho-nota { font-size: 15px; font-style: italic; }
 
-/* Conversa: cena à esquerda, conversa à direita com scroll próprio, zona de responder fixa em baixo */
+/* Conversa: introdução no topo (até à primeira escolha), à esquerda a cena, os medidores e a zona de responder,
+   à direita a conversa com scroll próprio */
 .lado-cena, .lado-conversa { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.intro-topo[hidden] { display: none; }
 .jogo.em-conversa {
   max-width: 1320px;
   height: 100vh;
   height: 100dvh;
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(340px, 1fr);
-  align-items: stretch;
+  grid-template-rows: auto auto auto minmax(0, 1fr);
+  grid-template-areas:
+    "intro intro"
+    "palco conversa"
+    "hud conversa"
+    "painel conversa";
+  column-gap: 18px;
+  row-gap: 12px;
 }
-.em-conversa .lado-cena { justify-content: center; }
-.em-conversa .lado-conversa { min-height: 0; }
+.em-conversa .lado-cena, .em-conversa .lado-conversa { display: contents; }
+.em-conversa .intro-topo { grid-area: intro; margin: 0; }
+.em-conversa .palco { grid-area: palco; }
+.em-conversa .palco svg { max-height: 40vh; width: auto; max-width: 100%; display: block; margin: 0 auto; }
+.em-conversa .hud { grid-area: hud; }
+.em-conversa .painel { grid-area: painel; align-self: start; max-height: 100%; }
+.em-conversa .conversa { grid-area: conversa; }
 .conversa {
   flex: 1;
   min-height: 0;
@@ -395,7 +409,7 @@ a.pausa { text-decoration: none; display: inline-block; }
 }
 .conversa > :first-child { margin-top: auto; }
 .conversa p { margin: 0; }
-.em-conversa .painel { flex: none; max-height: 58%; overflow-y: auto; box-shadow: none; padding: 14px 16px; }
+.em-conversa .painel { overflow-y: auto; box-shadow: none; padding: 14px 16px; }
 
 /* Cada voz no seu lugar: tu à esquerda (como na cena), o outro à direita */
 .msg { border: 3px solid var(--tinta); border-radius: 14px; padding: 8px 12px; max-width: 85%; }
@@ -430,11 +444,16 @@ a.pausa { text-decoration: none; display: inline-block; }
 
 /* Ecrãs estreitos (até tablets e janelas a meio ecrã): a ilustração por cima, a conversa por baixo */
 @media (max-width: 1024px) {
-  .jogo.em-conversa { grid-template-columns: 1fr; grid-template-rows: auto minmax(0, 1fr); gap: 10px; padding: 10px; }
-  .em-conversa .lado-cena { gap: 8px; }
-  .em-conversa .palco svg { max-height: 34vh; max-width: 100%; width: auto; margin: 0 auto; box-shadow: none; }
+  .jogo.em-conversa {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto minmax(0, 1fr) auto;
+    grid-template-areas: "intro" "palco" "hud" "conversa" "painel";
+    row-gap: 8px;
+    padding: 10px;
+  }
+  .em-conversa .palco svg { max-height: 30vh; box-shadow: none; }
   .em-conversa .hud { max-width: 720px; width: 100%; margin: 0 auto; }
-  .em-conversa .painel { max-height: 55%; }
+  .em-conversa .painel { max-height: 45dvh; align-self: stretch; }
   .nuvem-texto { font-size: 31px; line-height: 1.05; }
 }
 

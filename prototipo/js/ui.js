@@ -31,6 +31,7 @@
   const palco = $('#palco');
   const painel = $('#painel');
   const hud = $('#hud');
+  const intro = $('#intro');
   const conversa = $('#conversa');
 
   let estado = null;
@@ -46,6 +47,7 @@
   let rotuloPausa = null;
   let registo = [];          // a conversa no ecrã, de cima para baixo
   let voltarPara = 'responder';
+  let introAberta = false;   // a introdução do cenário fica no topo até à primeira escolha
   let pensamento = null;     // o pensamento automático do momento, na nuvem da cena
   let caraEu = null;         // a expressão da tua personagem, quando escolheste uma emoção
   let resultados = carregar();
@@ -455,6 +457,7 @@
     if (modo === 'consentimento' || modo === 'introducao' || modo === 'menu' || modo === 'perfil') {
       jogo.classList.remove('em-conversa');
       conversa.hidden = true;
+      intro.hidden = true;
       if (modo === 'consentimento') return desenharConsentimento();
       if (modo === 'introducao') return desenharIntroducao();
       if (modo === 'menu') return desenharMenu();
@@ -463,6 +466,8 @@
     const emConversa = modo !== 'fim';
     jogo.classList.toggle('em-conversa', emConversa);
     conversa.hidden = !emConversa;
+    intro.hidden = !(emConversa && introAberta);
+    if (!intro.hidden) intro.textContent = estado.cen.introducao;
     // Enquanto o outro fala e dizes o que sentes, ele fica em destaque. Depois é a tua vez.
     const vez = modo === 'sentir' ? 'outro' : modo === 'fim' ? null : 'eu';
     palco.innerHTML = Cena.desenhar(modo === 'sentir' ? Object.assign({}, estado, { eu: euVisivel() }) : estado, vez, pensamento, caraEu);
@@ -516,7 +521,8 @@
       partida += 1;
       Registo.definirContexto({ cenario: estado.cen.id, partida });
       Registo.evento('cenario_inicio', { verdade: estado.verdade, eu: estado.eu, outro: estado.outro });
-      registo = [{ quem: 'contexto', texto: estado.cen.introducao }];
+      registo = [];
+      introAberta = true;
       ouvirNo(false);
     } else if (acao === 'menu') {
       modo = 'menu';
@@ -553,6 +559,7 @@
     } else if (b.dataset.i !== undefined) {
       const i = Number(b.dataset.i);
       const op = Motor.atual(estado).opcoes[i];
+      introAberta = false;
       Registo.evento('opcao', Object.assign(momento(), {
         i, texto: op.texto, tipo: op.tipo, postura: op.postura || null, visiveis: visiveis(), ms: ms()
       }));
